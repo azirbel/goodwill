@@ -1,0 +1,14 @@
+<div>Something repo</div>
+
+<br/><br/>
+{{#if isLoadingRepositories}}
+  Loading...
+{{else}}
+  <div>Please select from starred repositories:</div>
+  {{#each repository in availableRepositories}}
+    <div>
+      {{input type='checkbox' checkedBinding='repository.checked'}}
+      <span>{{repository.full_name}}</span>
+    </div>
+  {{/each}}
+{{/if}}
