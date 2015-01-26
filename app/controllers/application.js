@@ -18,6 +18,7 @@ export default Ember.Controller.extend({
   /////////////////////////////////////////////////////////////////////////////
 
   username: '',
+  token: '',
 
   /////////////////////////////////////////////////////////////////////////////
   // REPOSITORY
@@ -31,10 +32,11 @@ export default Ember.Controller.extend({
     Ember.computed.mapBy('selectedRepositories', 'full_name'),
 
   // Get starred repositories to use for the list of options
+  // TODO(azirbel): NOTE: Observing here will make extra requests.
   usernameObserver: function() {
     console.log('AJAX request to load repositories.');
     this.loadRepositories();
-  }.observes('username'),
+  }.observes('username', 'token'),
 
   loadRepositories: function() {
     var _this = this;
@@ -42,7 +44,7 @@ export default Ember.Controller.extend({
       this.get('username') + '/starred?per_page=100';
     this.set('isLoadingRepositories', true);
 
-    ajax(url).then(function(response) {
+    this.githubAjax(url).then(function(response) {
       _this.set('availableRepositories', Ember.A(response));
       _this.get('availableRepositories').setEach('checked', false);
       _this.set('isLoadingRepositories', false);
@@ -105,7 +107,7 @@ export default Ember.Controller.extend({
       repoName = repo.full_name;
       url = 'https://api.github.com/search/issues?q=type:pr' + 
         '+involves:' + username + '+repo:' + repoName + '&per_page=3';
-      return ajax(url);
+      return _this.githubAjax(url);
     });
 
     this.set('isLoadingStats', true);
@@ -116,13 +118,13 @@ export default Ember.Controller.extend({
       // At this point we have information about each issue, but not the
       // detailed PR information (lines of code, comments url, etc) we need
       return Ember.RSVP.all(allIssues.map(function(issue) {
-        return ajax(issue.pull_request.url);
+        return _this.githubAjax(issue.pull_request.url);
       }));
     }).then(function(allPRs) {
       savedAllPRs = allPRs;
       // Now we just need to get the comments
       return Ember.RSVP.all(allPRs.map(function(pr) {
-        return ajax(pr.comments_url);
+        return _this.githubAjax(pr.comments_url);
       }));
     }).then(function(allComments) {
       _this.computeStatsObjects(savedAllPRs, allComments);
@@ -181,6 +183,70 @@ export default Ember.Controller.extend({
   }.property('finalStats'),
 
   /////////////////////////////////////////////////////////////////////////////
+  // HELPERS
+  /////////////////////////////////////////////////////////////////////////////
+
+  // If using oauth, send the appropriate header. Otherwise, don't bother.
+  githubAjax: function(url) {
+    var token = this.get('token');
+    if (token) {
+      return ajax({
+        url: url,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'token ' + token
+        }
+      });
+    } else {
+      return ajax(url);
+    }
+  },
+
+  // TODO(azirbel): Move this stuff
+  // TODO(azirbel): Trigger this stuff on enter, button press, and focusOut
+  usernameValid: false,
+  usernameErrorText: '',
+  verifyUsername: function() {
+    var _this = this;
+    var url = 'https://api.github.com/users/' + this.get('username');
+    this.githubAjax(url).then(function(response) {
+      _this.set('usernameValid', true);
+      _this.set('usernameErrorText', '');
+    }).catch(function(reason) {
+      _this.set('usernameValid', false);
+      _this.set('usernameErrorText', 'User not found.');
+    });
+  },
+
+  tokenValid: false,
+  tokenErrorText: '',
+  verifyToken: function() {
+    if (!this.get('usernameValid')) {
+      this.set('tokenValid', false);
+      this.set('tokenErrorText', 'Username is invalid.');
+      return;
+    }
+    var _this = this;
+    var username = this.get('username');
+    this.githubAjax('https://api.github.com/user').then(function(response) {
+      // TODO(azirbel): Trim input fields in all such places
+      if (response.login !== username) {
+        _this.set('tokenValid', false);
+        _this.set('tokenErrorText', 'That token is for a different user.');
+        console.log('Error logging in: username does not match.');
+        console.log('Expected: ' + username + ' but was: ' + response.login);
+        return;
+      }
+      _this.set('tokenValid', true);
+      _this.set('tokenErrorText', '');
+    }).catch(function(reason) {
+      _this.set('tokenValid', false);
+      _this.set('tokenErrorText', 'Authentication failed.');
+    });
+  },
+
+  /////////////////////////////////////////////////////////////////////////////
   // ACTIONS
   /////////////////////////////////////////////////////////////////////////////
 
@@ -199,7 +265,12 @@ export default Ember.Controller.extend({
 
     submitUsername: function(username) {
       this.set('username', username);
-      this.send('nextStep');
+      this.verifyUsername();
+    },
+
+    submitToken: function(token) {
+      this.set('token', token);
+      this.verifyToken();
     }
   }
 });

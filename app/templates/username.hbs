@@ -1,2 +1,11 @@
 <div>Please enter your github username:</div>
 {{input action='submitUsername'}}
+{{#if usernameValid}}Check!{{else}}Use{{/if}}
+<div style="color: #c00">{{usernameErrorText}}&nbsp;</div>
+
+<br/><br/>
+
+<div>Personal Access Token:</div>
+{{input action='submitToken'}}
+{{#if tokenValid}}Check!{{else}}Use{{/if}}
+<div style="color: #c00">{{tokenErrorText}}&nbsp;</div>
