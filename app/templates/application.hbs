@@ -1,26 +1,8 @@
 <h1>Reciprocity</h2>
 
-<h3>Score yourself on code reviews!</h3>
-
-<button {{action 'previousStep'}}>Previous</button>
-<button {{action 'nextStep'}}>Next</button>
+<h3>Review Your GitHub Code Reviews</h3>
 
 <br/>
 <br/>
 
-{{!-- TODO(azirbel): Use a carousel --}}
-
-{{#if isHome}}
-  <div class='section'>Section 1</div>
-  <div class='section'>Section 2</div>
-  <div class='section'>Section 3</div>
-{{/if}}
-{{#if isUsername}}
-  {{partial 'username'}}
-{{/if}}
-{{#if isRepositories}}
-  {{partial 'repositories'}}
-{{/if}}
-{{#if isResults}}
-  {{partial 'results'}}
-{{/if}}
+{{outlet}}

@@ -1,17 +1,13 @@
 <h3>Results</h3>
 
-{{#if isLoadingStats}}
-  Loading...
-{{else}}
-  <div>Goodwill:</div>
-  <div>{{totalGoodwill}}</div>
+<div>Goodwill:</div>
+<div>{{totalGoodwill}}</div>
 
+<br/><br/>
+
+{{#each stat in stats}}
+  <div>Author: {{stat.author}}</div>
+  <div>Reviewer: {{stat.reviewers}}</div>
+  <div>LOC: {{stat.loc}}</div>
   <br/><br/>
-
-  {{#each stat in finalStats}}
-    <div>Author: {{stat.author}}</div>
-    <div>Reviewer: {{stat.reviewers}}</div>
-    <div>LOC: {{stat.loc}}</div>
-    <br/><br/>
-  {{/each}}
-{{/if}}
+{{/each}}

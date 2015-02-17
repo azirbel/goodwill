@@ -1,7 +1,7 @@
 {
   "name": "reciprocity",
   "version": "0.1.0",
-  "description": "The Github-Goodwill Calculator",
+  "description": "Review Your GitHub Code Reviews",
   "private": true,
   "directories": {
     "doc": "doc",
