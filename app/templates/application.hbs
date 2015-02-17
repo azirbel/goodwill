@@ -1,8 +1,18 @@
-<h1>Reciprocity</h2>
-
-<h3>Review Your GitHub Code Reviews</h3>
-
-<br/>
-<br/>
-
-{{outlet}}
+<main>
+  <header>
+    {{#link-to 'username' class='step'}}
+      <div class='circle'>1</div>
+      Username
+    {{/link-to}}
+    {{#link-to 'repositories' class='step'}}
+      <div class='circle'>2</div>
+      Repositories
+    {{/link-to}}
+    {{#link-to 'results' class='step'}}
+      <div class='circle'>3</div>
+      Results
+    {{/link-to}}
+    <div class='step-bar'></div>
+  </header>
+  {{outlet}}
+</main>

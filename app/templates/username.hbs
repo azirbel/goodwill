@@ -1,11 +1,21 @@
-<div>Please enter your github username:</div>
-{{input value=username}}
+<h2>What is your GitHub username?</h2>
+<div class='username-input'>
+  {{input value=username}}
+</div>
+
+<h2>Want to analyze private repositories?</h2>
+<p>
+  Skip this step if you're only interested in open-source repositories. If you
+  want to analyze repositories you have private access to, though, you'll need
+  to grab a private access token from GitHub.
+</p>
+<div class='token-input'>
+  {{input value=token}}
+</div>
 
 <br/><br/>
 
-<div>Personal Access Token:</div>
-{{input value=token}}
-
-<br/><br/>
-
-{{link-to 'Repositories' 'repositories'}}
+<div class='button-block'>
+  {{link-to 'Home' 'index' class='home-btn'}}
+  {{link-to 'Next' 'repositories' class='next-btn'}}
+</div>

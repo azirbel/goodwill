@@ -13,10 +13,10 @@ export default Ember.Controller.extend({
   verifyUsername: function() {
     var _this = this;
     var url = 'https://api.github.com/users/' + this.get('username');
-    this.githubAjax(url).then(function(response) {
+    this.githubAjax(url).then(function() {
       _this.set('usernameValid', true);
       _this.set('usernameErrorText', '');
-    }).catch(function(reason) {
+    }).catch(function() {
       _this.set('usernameValid', false);
       _this.set('usernameErrorText', 'User not found.');
     });
@@ -43,7 +43,7 @@ export default Ember.Controller.extend({
       }
       _this.set('tokenValid', true);
       _this.set('tokenErrorText', '');
-    }).catch(function(reason) {
+    }).catch(function() {
       _this.set('tokenValid', false);
       _this.set('tokenErrorText', 'Authentication failed.');
     });
