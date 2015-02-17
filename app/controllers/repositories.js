@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
         name: baseRepository.full_name,
         checked: false
       });
-    });
+    }).sortBy('name');
   }.property('model.[]'),
 
   selectedRepositories: Ember.computed.filterBy('allRepositories', 'checked'),
@@ -18,5 +18,11 @@ export default Ember.Controller.extend({
   selectedRepsitoriesOberver: function() {
     this.set('controllers.application.repositories',
         this.get('selectedRepositories'));
-  }.on('init').observes('selectedRepositories.[]')
+  }.on('init').observes('selectedRepositories.[]'),
+
+  actions: {
+    toggleChecked: function(repository) {
+      repository.toggleProperty('checked');
+    }
+  }
 });

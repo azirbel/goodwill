@@ -1,10 +1,16 @@
-<div>Select Repositories</div>
+<h1>Select Repositories</h1>
 
-<br/><br/>
-<div>Please select from starred repositories:</div>
+<p>Here's a list of your starred repositories. Please select which ones you'd
+like to analyze.</p>
+
 {{#each repository in allRepositories}}
-  <div>
-    {{input type='checkbox' checkedBinding='repository.checked'}}
+  <div {{bind-attr class=':repository repository.checked:checked'}}
+  {{action 'toggleChecked' repository bubbles=false}}>
+    {{#if repository.checked}}
+      {{fa-icon 'check-square-o'}}
+    {{else}}
+      {{fa-icon 'square-o'}}
+    {{/if}}
     <span>{{repository.name}}</span>
   </div>
 {{/each}}

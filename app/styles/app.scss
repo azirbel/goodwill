@@ -1,6 +1,11 @@
 @import 'typography';
 @import 'variables';
 
+// Pages
+@import 'pages/repositories';
+
+// TODO(azirbel): Only imports in this file
+
 html, body {
   margin: 0;
   padding: 0;
@@ -130,6 +135,7 @@ header {
   text-align: center;
 }
 
+// TODO(azirbel): Margins on 3-column layout
 .next-btn {
   position: absolute;
   right: 0;

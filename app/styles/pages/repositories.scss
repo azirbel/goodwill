@@ -1,0 +1,17 @@
+.repository {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+
+  cursor: pointer;
+
+  &.checked {
+    background-color: $primary-color-light;
+  }
+
+  .fa {
+    width: 16px;
+    margin-top: 1px;
+  }
+}
