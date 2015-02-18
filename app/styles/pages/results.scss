@@ -1,0 +1,71 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.left-2 {
+  float: left;
+  width: 66.66%;
+}
+
+.right-1 {
+  float: left;
+  width: 33.33%;
+}
+
+.goodwill {
+  font-size: 56px;
+}
+
+a.pr-stat {
+  position: relative;
+  border: 1px solid $primary-color;
+  overflow: hidden;
+  display: block;
+  color: #000; // TODO(azirbel): Hack to reset the link text back
+
+  &:hover {
+    background-color: $primary-color-light;
+  }
+}
+
+a.pr-stat + a.pr-stat {
+  margin-top: 20px;
+}
+
+.left-1 {
+  float: left;
+  width: 33.33%;
+}
+
+.right-2 {
+  float: left;
+  width: 66.66%;
+}
+
+.loc {
+  height: 100%;
+  line-height: 112px; // TODO(azirbel): Hack, value set to match headers on the right
+  margin-left: auto;
+  margin-right: auto;
+
+  text-align: center;
+  font-size: 48px;
+}
+
+.positive {
+  color: green;
+  
+  &::before {
+    content: '+'
+  }
+}
+
+.negative {
+  color: red;
+  
+  &::before {
+    content: '-'
+  }
+}

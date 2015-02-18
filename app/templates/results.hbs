@@ -1,15 +1,36 @@
-<h3>Results</h3>
+<h1>Results & Analysis</h1>
 
-<div>Goodwill:</div>
-<div>{{totalGoodwill}}</div>
-
-<br/><br/>
+<div class='wrapper'>
+  <div class='left-2'>
+    <h2>Goodwill</h2>
+    <div {{bind-attr
+    class=':goodwill totalGoodwillIsPositive:positive:negative'}}>
+      {{absTotalGoodwill}}
+    </div>
+  </div>
+  <div class='right-1'>
+    <h2>Top Reviewers</h2>
+    <p>Dylnuge</p>
+    <p>Someone else</p>
+  </div>
+</div>
 
 {{#each stat in stats}}
-  <div>Author: {{stat.author}}</div>
-  <div>Reviewer: {{stat.reviewers}}</div>
-  <div>LOC: {{stat.loc}}</div>
-  <br/><br/>
+  <a target='_blank' {{bind-attr href='stat.htmlUrl'}} class='pr-stat'>
+    <div class='left-1'>
+      <div {{bind-attr class=':loc stat.isPositive:positive:negative'}}>
+        {{stat.loc}}
+      </div>
+    </div>
+    <div class='right-2'>
+      {{#if stat.isPositive}}
+        <h4>You reviewed a pull request by {{stat.author}}</h4>
+      {{else}}
+        <h4>{{stat.formattedReviewers}} reviewed your pull request</h4>
+      {{/if}}
+      <h4>{{stat.formattedDate}} in {{stat.repoName}}</h4>
+    </div>
+  </a>
 {{/each}}
 
 <div class='button-block'>

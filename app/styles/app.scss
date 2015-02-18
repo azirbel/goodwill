@@ -3,6 +3,7 @@
 
 // Pages
 @import 'pages/repositories';
+@import 'pages/results';
 
 // TODO(azirbel): Only imports in this file
 
@@ -89,6 +90,7 @@ header {
   }
 
   // Add the line between steps
+  // TODO(azirbel): Use lobotomized owl?
   .step:not(:first-child)::after {
     content: " ";
     position: absolute;
