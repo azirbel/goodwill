@@ -20,6 +20,6 @@ export default Ember.Route.extend({
         applicationController.get('repositories').filter(function(repository) {
           return model.mapBy('full_name').contains(repository);
         })
-    )
+    );
   }
 });

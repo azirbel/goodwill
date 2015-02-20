@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
   // Persisted between steps
   username: '',
   token: '',
-  repositories: function() { return [] }.property(),
+  repositories: function() { return []; }.property(),
 
   showIndex: false,
 
