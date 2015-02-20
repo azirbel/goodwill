@@ -1,14 +1,23 @@
-$primary-color: #7f70fa;
-$secondary-color: #70f5fa;
+// Color
+// ----------------------------------------------------------------------------
+$primary-color: #8862e2;
+$secondary-color: #D080EC;
 
-// For hover effects on a white background
-$primary-color-light1: lighten($primary-color, 25%);
+$primary-color-dark: #3E1B90;
+$primary-color-light: lighten($primary-color, 20%);
+$primary-color-superlight: lighten($primary-color, 30%);
 
-// For selected elements on a white background
-$primary-color-light2: lighten($primary-color, 15%);
+// Applications of color
+// ----------------------------------------------------------------------------
+$dark-btn-color: $primary-color-dark;
+$dark-btn-hover-color: $primary-color;
 
-// For hover effects on a $primary-color background
-$primary-color-light3: lighten($primary-color, 5%);
+$light-btn-color: $primary-color-superlight;
+$light-btn-hover-color: $primary-color-light;
+
+$link-color: $primary-color;
+
+$hover-bg-color: $primary-color-superlight;
 
 $positive-color: $primary-color;
 $negative-color: $secondary-color;

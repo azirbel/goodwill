@@ -26,7 +26,7 @@ a.pr-stat {
   color: #000; // TODO(azirbel): Hack to reset the link text back
 
   &:hover {
-    background-color: $primary-color-light1;
+    background-color: $hover-bg-color;
   }
 }
 

@@ -7,11 +7,11 @@
   cursor: pointer;
 
   &:hover {
-    background-color: $primary-color-light1;
+    background-color: $hover-bg-color;
   }
 
   &.checked {
-    background-color: $primary-color-light2;
+    background-color: $primary-color-light;
   }
 
   .fa {

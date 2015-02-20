@@ -1,6 +1,6 @@
 .welcome {
   height: 100vh;
-  background-color: $primary-color;
+  background-color: $primary-color-dark;
   position: relative;
   overflow: hidden;
 }
@@ -27,15 +27,15 @@
 }
 
 .start-btn {
-  background-color: $primary-color-light1;
+  background-color: $light-btn-color;
   line-height: 30px; // TODO(azirbel): Variable
   padding: 15px 30px;
   margin: 20px 0;
-  color: $primary-color;
   display: inline-block;
+  color: #000;
 
   &:hover {
     text-decoration: none;
-    background-color: $primary-color-light2;
+    background-color: $light-btn-hover-color;
   }
 }
