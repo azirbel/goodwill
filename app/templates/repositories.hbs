@@ -3,15 +3,15 @@
 <p>Here's a list of your starred repositories. Please select which ones you'd
 like to analyze.</p>
 
-{{#each repository in allRepositories}}
-  <div {{bind-attr class=':repository repository.checked:checked'}}
-  {{action 'toggleChecked' repository bubbles=false}}>
-    {{#if repository.checked}}
+{{#each repoWrapper in displayRepoWrappers}}
+  <div {{bind-attr class=':repository repoWrapper.checked:checked'}}
+  {{action 'toggleChecked' repoWrapper.name bubbles=false}}>
+    {{#if repoWrapper.checked}}
       {{fa-icon 'check-square-o'}}
     {{else}}
       {{fa-icon 'square-o'}}
     {{/if}}
-    <span>{{repository.name}}</span>
+    <span>{{repoWrapper.name}}</span>
   </div>
 {{/each}}
 

@@ -4,9 +4,25 @@ export default Ember.Controller.extend({
   // Persisted between steps
   username: '',
   token: '',
-  repositories: null,
+  repositories: function() { return [] }.property(),
 
   showIndex: false,
+
+  init: function() {
+    this._super();
+    var cookieUsername = Cookies.get('username');
+    var cookieToken = Cookies.get('token');
+    var cookieRepositories = Cookies.get('repositories');
+    if (cookieUsername) {
+      this.set('username', cookieUsername);
+    }
+    if (cookieToken) {
+      this.set('token', cookieToken);
+    }
+    if (cookieRepositories) {
+      this.set('repositories', cookieRepositories.split(','));
+    }
+  },
 
   // TODO(azirbel): Move this stuff
   // TODO(azirbel): Trigger this stuff on enter, button press, and focusOut

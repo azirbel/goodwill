@@ -120,7 +120,6 @@ export default Ember.Controller.extend({
       }
       sizeStats[largeFlag][positiveFlag] += 1;
     });
-    debugger;
     return sizeStats;
   }.property('stats', 'username'),
 

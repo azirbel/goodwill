@@ -3,26 +3,35 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   needs: ['application'],
 
-  // Get the list of repositories and add a "checked" attribute to each object
+  selectedRepositories:
+    Ember.computed.alias('controllers.application.repositories'),
+
   allRepositories: function() {
-    return (this.get('model') || []).map(function(baseRepository) {
-      return Ember.Object.create({
-        name: baseRepository.full_name,
-        checked: false
-      });
-    }).sortBy('name');
+    return (this.get('model') || []).mapBy('full_name').sort();
   }.property('model.[]'),
 
-  selectedRepositories: Ember.computed.filterBy('allRepositories', 'checked'),
+  // Get the list of repositories and add a "checked" attribute to each object
+  displayRepoWrappers: function() {
+    var selectedRepositories = this.get('selectedRepositories');
+    return this.get('allRepositories').map(function(repository) {
+      return Ember.Object.create({
+        name: repository,
+        checked: selectedRepositories.contains(repository)
+      });
+    });
+  }.property('allRepositories.[]', 'selectedRepositories.[]'),
 
-  selectedRepsitoriesOberver: function() {
-    this.set('controllers.application.repositories',
-        this.get('selectedRepositories'));
+  persistenceObserver: function() {
+    Cookies.set('repositories', this.get('selectedRepositories'));
   }.on('init').observes('selectedRepositories.[]'),
 
   actions: {
     toggleChecked: function(repository) {
-      repository.toggleProperty('checked');
+      if (this.get('selectedRepositories').contains(repository)) {
+        this.get('selectedRepositories').removeObject(repository);
+      } else {
+        this.get('selectedRepositories').pushObject(repository);
+      }
     }
   }
 });

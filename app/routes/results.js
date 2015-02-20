@@ -11,7 +11,7 @@ export default Ember.Route.extend({
     // TODO(azirbel): Deal with rate limits - abstract into a helper api
     var repoPromises = repositories.map(function(repo) {
       var url = 'https://api.github.com/search/issues?q=type:pr' + 
-        '+involves:' + username + '+repo:' + repo.name + '&per_page=100';
+        '+involves:' + username + '+repo:' + repo + '&per_page=100';
       return GithubHelpers.ajax(url, token);
     });
 
