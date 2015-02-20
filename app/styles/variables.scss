@@ -1,4 +1,14 @@
 $primary-color: #7f70fa;
 $secondary-color: #70f5fa;
 
-$primary-color-light: lighten($primary-color, 20%);
+// For hover effects on a white background
+$primary-color-light1: lighten($primary-color, 25%);
+
+// For selected elements on a white background
+$primary-color-light2: lighten($primary-color, 15%);
+
+// For hover effects on a $primary-color background
+$primary-color-light3: lighten($primary-color, 5%);
+
+$positive-color: $primary-color;
+$negative-color: $secondary-color;

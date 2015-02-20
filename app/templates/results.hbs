@@ -10,9 +10,25 @@
   </div>
   <div class='right-1'>
     <h2>Top Reviewers</h2>
-    <p>Dylnuge</p>
-    <p>Someone else</p>
+    {{#each reviewer in topReviewers}}
+      <p>{{reviewer.username}} - {{reviewer.loc}}</p>
+    {{/each}}
   </div>
+</div>
+
+<div class="wrapper">
+  <p>
+    Large pull requests: You authored
+    <span class='inline-positive'>{{prSizeStats.large.negative}}</span>
+    and reviewed
+    <span class='inline-negative'>{{prSizeStats.large.positive}}</span>.
+  </p>
+  <p>
+    Small pull requests: You authored
+    <span class='inline-positive'>{{prSizeStats.small.negative}}</span>
+    and reviewed
+    <span class='inline-negative'>{{prSizeStats.small.positive}}</span>.
+  </p>
 </div>
 
 {{#each stat in stats}}

@@ -6,6 +6,8 @@ export default Ember.Controller.extend({
   token: '',
   repositories: null,
 
+  showIndex: false,
+
   // TODO(azirbel): Move this stuff
   // TODO(azirbel): Trigger this stuff on enter, button press, and focusOut
   usernameValid: false,

@@ -3,11 +3,13 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   needs: ['application'],
 
+  username: Ember.computed.alias('controllers.application.username'),
+
   // All stats, not necessarily created or LGTM'd by the right user
   // TODO(azirbel): Better name. "Stats" doesn't make sense.
   allStats: function() {
     var _this = this;
-    var username = this.get('controllers.application.username');
+    var username = this.get('username');
     return this.get('model').map(function(prAndComments) {
       var pr = prAndComments[0];
       var comments = prAndComments[1];
@@ -50,7 +52,11 @@ export default Ember.Controller.extend({
         valid: valid
       };
     });
-  }.property('model'),
+  }.property('model', 'username'),
+
+  // TODO(azirbel): Override LOC/reviewers/etc in description or comments. That
+  // way you can override/clean up your report. (Recommend editing comments
+  // rather than adding new ones so people aren't notified of your OCD)
 
   // We put all reviewer usernames in lowercase
   parseReviewersFromComment: function(prAuthor, comment) {
@@ -88,6 +94,63 @@ export default Ember.Controller.extend({
 
   statsSorting: ['date:desc'],
   stats: Ember.computed.sort('validStats', 'statsSorting'),
+
+  prSizeStats: function() {
+    var username = this.get('username');
+    var sizeStats = {
+      large: {
+        positive: 0,
+        negative: 0
+      },
+      small: {
+        positive: 0,
+        negative: 0
+      }
+    };
+    var positiveFlag;
+    var largeFlag;
+    this.get('stats').forEach(function(stat) {
+      positiveFlag = 'positive';
+      largeFlag = 'large';
+      if (stat.loc < 200) {
+        largeFlag = 'small';
+      }
+      if (stat.author === username) {
+        positiveFlag = 'negative';
+      }
+      sizeStats[largeFlag][positiveFlag] += 1;
+    });
+    debugger;
+    return sizeStats;
+  }.property('stats', 'username'),
+
+  // Top 3 reviewers of your code
+  topReviewers: function() {
+    var totalsByReviewer = {};
+    var username = this.get('username');
+    var topReviewers = [];
+
+    this.get('stats').forEach(function(stat) {
+      if (stat.author !== username) {
+        return;
+      }
+      stat.reviewers.forEach(function(reviewer) {
+        if (!totalsByReviewer[reviewer]) {
+          totalsByReviewer[reviewer] = 0;
+        }
+        totalsByReviewer[reviewer] += stat.loc;
+      });
+    });
+
+    for (var key in totalsByReviewer) {
+      topReviewers.pushObject({
+        username: key,
+        loc: totalsByReviewer[key]
+      });
+    }
+    topReviewers.sortBy('loc');
+    return topReviewers.slice(0, 3);
+  }.property('stats', 'username'),
 
   totalGoodwill: function() {
     var loc;

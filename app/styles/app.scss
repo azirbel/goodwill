@@ -1,11 +1,16 @@
-@import 'typography';
 @import 'variables';
+@import 'typography';
 
 // Pages
+@import 'pages/index';
 @import 'pages/repositories';
 @import 'pages/results';
 
 // TODO(azirbel): Only imports in this file
+
+html {
+  overflow-y: scroll;
+}
 
 html, body {
   margin: 0;
@@ -62,7 +67,7 @@ header {
     &:hover {
       text-decoration: none;
       .circle {
-        background-color: $primary-color-light;
+        background-color: $primary-color-light1;
       }
     }
 
@@ -107,6 +112,8 @@ header {
 
 .button-block {
   overflow: hidden; // Wrap around floating content
+  margin: 30px 0;
+  height: 30px; // TODO(azirbel): Variable
 }
 
 // TODO(azirbel): Duplication with next-btn
@@ -118,11 +125,11 @@ header {
   background-color: $primary-color;
   color: #fff;
   text-align: center;
-  line-height: 30px;
+  line-height: 30px; // TODO(azirbel): Variable
 
   &:hover {
     text-decoration: none;
-    background-color: $primary-color-light;
+    background-color: $primary-color-light3;
   }
 }
 
@@ -146,11 +153,11 @@ header {
   background-color: $primary-color;
   color: #fff;
   text-align: center;
-  line-height: 30px;
+  line-height: 30px; // TODO(azirbel): Variable
 
   &:hover {
     text-decoration: none;
-    background-color: $primary-color-light;
+    background-color: $primary-color-light3;
   }
 }
 

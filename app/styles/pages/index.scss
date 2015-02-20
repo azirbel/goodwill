@@ -1,0 +1,41 @@
+.welcome {
+  height: 100vh;
+  background-color: $primary-color;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-block {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+
+  text-align: center;
+  color: #fff;
+}
+
+.project-name {
+  font-family: 'Zantroke';
+  letter-spacing: 2px;
+  font-size: 72px;
+  margin: 15px 0;
+}
+
+.tagline {
+  font-size: 36px;
+  margin: 15px 0;
+}
+
+.start-btn {
+  background-color: $primary-color-light1;
+  line-height: 30px; // TODO(azirbel): Variable
+  padding: 15px 30px;
+  margin: 20px 0;
+  color: $primary-color;
+  display: inline-block;
+
+  &:hover {
+    text-decoration: none;
+    background-color: $primary-color-light2;
+  }
+}

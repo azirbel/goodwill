@@ -6,8 +6,12 @@
 
   cursor: pointer;
 
+  &:hover {
+    background-color: $primary-color-light1;
+  }
+
   &.checked {
-    background-color: $primary-color-light;
+    background-color: $primary-color-light2;
   }
 
   .fa {
