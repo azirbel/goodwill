@@ -1,6 +1,6 @@
-<h1>Select Repositories</h1>
+<h1 class='title'>Select Repositories</h1>
 
-<p>Here's a list of your starred repositories. Please select which ones you'd
+<p class='last'>Here's a list of your starred repositories. Please select which ones you'd
 like to analyze.</p>
 
 {{#each repoWrapper in displayRepoWrappers}}
@@ -11,7 +11,7 @@ like to analyze.</p>
     {{else}}
       {{fa-icon 'square-o'}}
     {{/if}}
-    <span>{{repoWrapper.name}}</span>
+    <span class='repo-name'>{{repoWrapper.name}}</span>
   </div>
 {{/each}}
 

@@ -1,21 +1,73 @@
-// TODO(azirbel): Evaluate font options
-// Fira Sans
-// Roboto
-// Droid Sans
-// Cantarell
-// Open Sans
-
 @font-face {
-  font-family: 'Fira Sans';
-  src: url('/assets/fonts/FiraSans-Regular.otf') format('opentype');
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/assets/fonts/OpenSans-Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Foglihten';
-  src: url('/assets/fonts/FoglihtenNo01.otf') format('opentype');
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('/assets/fonts/OpenSans-Light.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Zantroke';
   src: url('/assets/fonts/Zantroke.otf') format('opentype');
+}
+
+@mixin standard-text {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 300;
+}
+
+a {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 300;
+  color: $link-color;
+
+  &:link, &:visited, &:active {
+    text-decoration: none;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.project-title {
+  font-family: 'Zantroke';
+  letter-spacing: 2px;
+  font-size: 72px;
+}
+
+.tagline {
+  font-size: 26px;
+  color: $primary-color-light;
+}
+
+h1 {
+  font-size: 32px;
+  margin: 48px 0 24px 0;
+}
+
+h1.title {
+  margin-top: 32px;
+}
+
+h2 {
+  font-size: 24px;
+  margin: 32px 0 24px 0;
+}
+
+p {
+  @include standard-text;
+  margin: 24px 0 32px 0;
+}
+
+p.last {
+  margin-bottom: 12px;
 }

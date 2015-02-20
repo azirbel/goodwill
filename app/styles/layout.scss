@@ -1,0 +1,71 @@
+main {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  position: relative;
+}
+
+// This is the 1-2-3 step header
+header {
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+
+  a.step {
+    position: relative;
+    float: left;
+    width: 33.33%;
+    color: $primary-color-dark;
+
+    &:hover {
+      text-decoration: none;
+      color: $primary-color-dark;
+      .circle {
+        background-color: $hover-bg-color;
+      }
+    }
+
+    &.active {
+      .circle {
+        background-color: $primary-color-dark;
+        color: #fff;
+      }
+    }
+  }
+
+  .circle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    border: 2px solid $primary-color-dark;
+    border-radius: 50%;
+
+    line-height: 40px;
+    background-color: #fff;
+    z-index: 2;
+  }
+
+  .step-text {
+    margin-top: 6px;
+    font-weight: 300;
+  }
+
+  // Add the line between steps
+  .step + .step::after {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    left: -50%;
+
+    top: 20px;
+    height: 0px;
+    border: 1px solid $primary-color-dark;
+
+    z-index: 1;
+  }
+}

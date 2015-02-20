@@ -1,41 +1,41 @@
 .welcome {
-  height: 100vh;
+  height: 100vh; // 100% viewport height
   background-color: $primary-color-dark;
   position: relative;
   overflow: hidden;
+
+  text-align: center;
+  color: #fff;
 }
 
 .welcome-block {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-
-  text-align: center;
-  color: #fff;
-}
-
-.project-name {
-  font-family: 'Zantroke';
-  letter-spacing: 2px;
-  font-size: 72px;
-  margin: 15px 0;
-}
-
-.tagline {
-  font-size: 36px;
-  margin: 15px 0;
 }
 
 .start-btn {
   background-color: $light-btn-color;
   line-height: 30px; // TODO(azirbel): Variable
   padding: 15px 30px;
-  margin: 20px 0;
+  margin-top: 24px;
   display: inline-block;
-  color: #000;
+  font-size: 32px;
+  color: $primary-color-dark;
 
   &:hover {
     text-decoration: none;
     background-color: $light-btn-hover-color;
   }
+}
+
+.more-text {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  margin: 0;
+}
+
+main.index {
+  margin-bottom: 80px;
 }

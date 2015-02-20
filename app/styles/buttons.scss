@@ -1,0 +1,56 @@
+.button-block {
+  overflow: hidden; // Wrap around floating content
+  margin: 30px 0;
+  height: 30px; // TODO(azirbel): Variable
+}
+
+// TODO(azirbel): Duplication with next-btn
+.back-btn {
+  position: absolute;
+  left: 0;
+  // TODO(azirbel): Variable
+  width: 33.33%;
+  background-color: $dark-btn-color;
+  color: #fff;
+  text-align: center;
+  line-height: 30px; // TODO(azirbel): Variable
+
+  &:hover {
+    text-decoration: none;
+    background-color: $dark-btn-hover-color;
+    color: #fff;
+  }
+}
+
+.back-btn::before {
+  content: '< ';
+}
+
+.home-btn {
+  position: absolute;
+  left: 33.33%;
+  width: 33.33%;
+  text-align: center;
+}
+
+// TODO(azirbel): Margins on 3-column layout
+.next-btn {
+  position: absolute;
+  right: 0;
+  // TODO(azirbel): Variable
+  width: 33.33%;
+  background-color: $dark-btn-color;
+  color: #fff;
+  text-align: center;
+  line-height: 30px; // TODO(azirbel): Variable
+
+  &:hover {
+    text-decoration: none;
+    background-color: $dark-btn-hover-color;
+    color: #fff;
+  }
+}
+
+.next-btn::after {
+  content: ' >';
+}

@@ -1,12 +1,17 @@
 @import 'variables';
+
+// Main
 @import 'typography';
+@import 'layout';
+
+// Components
+@import 'buttons';
 
 // Pages
 @import 'pages/index';
+@import 'pages/user';
 @import 'pages/repositories';
 @import 'pages/results';
-
-// TODO(azirbel): Only imports in this file
 
 html {
   overflow-y: scroll;
@@ -18,153 +23,6 @@ html, body {
 }
 
 * {
-  font-family: 'Fira Sans', 'Verdana';
+  font-family: 'Open Sans', 'Verdana';
   font-weight: normal;
-}
-
-a {
-  color: $link-color;
-
-  &:link, &:visited, &:active {
-    text-decoration: none;
-  }
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-h1 {
-  font-size: 26px;
-}
-
-h2 {
-  font-size: 18px;
-}
-
-h3 {
-  font-size: 16px;
-}
-
-main {
-  width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-  position: relative;
-}
-
-header {
-  overflow: hidden; // Wrap around floating content
-  text-align: center;
-  position: relative;
-
-  a.step {
-    width: 33.33%;
-    float: left;
-    position: relative;
-    color: $primary-color-dark;
-
-    &:hover {
-      text-decoration: none;
-      color: inherit;
-      .circle {
-        background-color: $hover-bg-color;
-      }
-    }
-
-    &.active {
-      .circle {
-        background-color: $primary-color-dark;
-        color: #fff;
-      }
-    }
-  }
-
-  .circle {
-    margin-left: auto;
-    margin-right: auto;
-
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 50%;
-    border: 2px solid $primary-color-dark;
-
-    position: relative;
-    background-color: #fff;
-    z-index: 2;
-  }
-
-  // Add the line between steps
-  // TODO(azirbel): Use lobotomized owl?
-  .step:not(:first-child)::after {
-    content: " ";
-    position: absolute;
-    width: 100%;
-    left: -50%;
-
-    top: 20px;
-    height: 0px;
-    border: 1px solid $primary-color-dark;
-
-    z-index: 1;
-  }
-}
-
-.button-block {
-  overflow: hidden; // Wrap around floating content
-  margin: 30px 0;
-  height: 30px; // TODO(azirbel): Variable
-}
-
-// TODO(azirbel): Duplication with next-btn
-.back-btn {
-  position: absolute;
-  left: 0;
-  // TODO(azirbel): Variable
-  width: 33.33%;
-  background-color: $dark-btn-color;
-  color: #fff;
-  text-align: center;
-  line-height: 30px; // TODO(azirbel): Variable
-
-  &:hover {
-    text-decoration: none;
-    background-color: $dark-btn-hover-color;
-    color: #fff;
-  }
-}
-
-.back-btn::before {
-  content: '< ';
-}
-
-.home-btn {
-  position: absolute;
-  left: 33.33%;
-  width: 33.33%;
-  text-align: center;
-}
-
-// TODO(azirbel): Margins on 3-column layout
-.next-btn {
-  position: absolute;
-  right: 0;
-  // TODO(azirbel): Variable
-  width: 33.33%;
-  background-color: $dark-btn-color;
-  color: #fff;
-  text-align: center;
-  line-height: 30px; // TODO(azirbel): Variable
-
-  &:hover {
-    text-decoration: none;
-    background-color: $dark-btn-hover-color;
-    color: #fff;
-  }
-}
-
-.next-btn::after {
-  content: ' >';
 }
