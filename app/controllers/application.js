@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
 
   showIndex: false,
 
+  // TODO(azirbel): Use recirpocity-namespaced cookie names
   init: function() {
     this._super();
     var cookieUsername = Cookies.get('username');
