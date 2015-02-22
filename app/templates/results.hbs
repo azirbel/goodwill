@@ -17,6 +17,12 @@
 </div>
 
 <div class="wrapper">
+  {{time-series-chart
+    lineData=goodwillOverTime
+  }}
+</div>
+
+<div class="wrapper">
   <p>
     Large pull requests: You authored
     <span class='inline-positive'>{{prSizeStats.large.negative}}</span>

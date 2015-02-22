@@ -19,8 +19,12 @@ export default Ember.Controller.extend({
       var valid = (reviewers.length > 0) &&
         ((author === username) || (reviewers.contains(username)));
 
-      // For formatting
       var isPositive = author !== username;
+      var loc = pr.additions + pr.deletions;
+      if (!isPositive) {
+        loc *= -1;
+      }
+
       var formattedReviewers = '';
       if (reviewers.length === 1) {
         formattedReviewers = reviewers[0];
@@ -40,7 +44,7 @@ export default Ember.Controller.extend({
         repoName: pr.base.repo.full_name,
         additions: pr.additions,
         deletions: pr.deletions,
-        loc: pr.additions + pr.deletions,
+        loc: loc,
         author: author.toLowerCase(),
         reviewers: reviewers,
         isPositive: isPositive,
@@ -150,6 +154,21 @@ export default Ember.Controller.extend({
     topReviewers.sortBy('loc');
     return topReviewers.slice(0, 3);
   }.property('stats', 'username'),
+
+  goodwillOverTime: function() {
+    var statsAscending = this.get('stats').reverse();
+    var currentGoodwill = 0;
+    var timeSeries = [];
+    statsAscending.forEach(function(stat) {
+      currentGoodwill += stat.loc;
+      timeSeries.pushObject({
+        label: 'THING',
+        time: stat.date,
+        value: currentGoodwill
+      });
+    });
+    return timeSeries;
+  }.property('stats'),
 
   totalGoodwill: function() {
     var loc;
