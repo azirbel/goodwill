@@ -5,6 +5,49 @@ export default Ember.Controller.extend({
 
   username: Ember.computed.alias('controllers.application.username'),
 
+  metrics: Ember.A([
+    { name: 'Complexity Score', id: 'score' },
+    { name: 'Number of PRs', id: 'num' },
+    { name: 'Lines of Code', id: 'loc' }
+  ]),
+
+  metric: 'score',
+
+  // TODO(azirbel): Hack for now
+  metricIsScore: Ember.computed.equal('metric', 'score'),
+  metricIsNum: Ember.computed.equal('metric', 'num'),
+  metricIsLoc: Ember.computed.equal('metric', 'loc'),
+
+  calculateComplexity: function(numComments, loc) {
+    var commentScore = 0;
+    var locScore = 0;
+    loc = Math.abs(loc);
+    if (numComments === 0) {
+      commentScore = 2;
+    } else if (numComments < 3) {
+      commentScore = 1;
+    } else if (numComments < 15) {
+      commentScore = 2;
+    } else {
+      commentScore = 3;
+    }
+    if (loc === 0) {
+      locScore = 2;
+    } else if (loc < 10) {
+      locScore = 1;
+    } else if (loc < 60) {
+      locScore = 2;
+    } else if (loc < 250) {
+      locScore = 3;
+    } else {
+      locScore = 4;
+    }
+    return commentScore * locScore;
+  },
+
+  // TODO(azirbel): Am I getting both issue comments and review comments
+  // correctly? Check output
+
   // All stats, not necessarily created or LGTM'd by the right user
   // TODO(azirbel): Better name. "Stats" doesn't make sense.
   allStats: function() {
@@ -20,10 +63,9 @@ export default Ember.Controller.extend({
         ((author === username) || (reviewers.contains(username)));
 
       var isPositive = author !== username;
-      var loc = pr.additions + pr.deletions;
-      if (!isPositive) {
-        loc *= -1;
-      }
+      var num = isPositive ? 1 : -1;
+      var loc = (pr.additions + pr.deletions) * num;
+      var score = _this.calculateComplexity(comments.length, loc);
 
       var formattedReviewers = '';
       if (reviewers.length === 1) {
@@ -40,11 +82,13 @@ export default Ember.Controller.extend({
       // TODO(azirbel): Fix the issue where you comment on your own PR saying
       // it is LGTM'd by someone else. Possibly we can parse this automatically
 
-      return {
+      return Ember.Object.create({
         repoName: pr.base.repo.full_name,
         additions: pr.additions,
         deletions: pr.deletions,
         loc: loc,
+        num: num,
+        score: score,
         author: author.toLowerCase(),
         reviewers: reviewers,
         isPositive: isPositive,
@@ -54,7 +98,7 @@ export default Ember.Controller.extend({
         url: pr.url,
         htmlUrl: pr.html_url,
         valid: valid
-      };
+      });
     });
   }.property('model', 'username'),
 
@@ -129,8 +173,9 @@ export default Ember.Controller.extend({
 
   // Top 3 reviewers of your code
   topReviewers: function() {
-    var totalsByReviewer = {};
     var username = this.get('username');
+    var metric = this.get('metric');
+    var totalsByReviewer = {};
     var topReviewers = [];
 
     this.get('stats').forEach(function(stat) {
@@ -141,26 +186,27 @@ export default Ember.Controller.extend({
         if (!totalsByReviewer[reviewer]) {
           totalsByReviewer[reviewer] = 0;
         }
-        totalsByReviewer[reviewer] += stat.loc;
+        totalsByReviewer[reviewer] += stat.get(metric);
       });
     });
 
     for (var key in totalsByReviewer) {
       topReviewers.pushObject({
         username: key,
-        loc: totalsByReviewer[key]
+        points: totalsByReviewer[key]
       });
     }
-    topReviewers.sortBy('loc');
+    topReviewers.sortBy('points');
     return topReviewers.slice(0, 3);
-  }.property('stats', 'username'),
+  }.property('stats', 'username', 'metric'),
 
   goodwillOverTime: function() {
+    var metric = this.get('metric');
     var statsAscending = this.get('stats').reverse();
     var currentGoodwill = 0;
     var timeSeries = [];
     statsAscending.forEach(function(stat) {
-      currentGoodwill += stat.loc;
+      currentGoodwill += stat.get(metric);
       timeSeries.pushObject({
         label: 'THING',
         time: stat.date,
@@ -168,18 +214,14 @@ export default Ember.Controller.extend({
       });
     });
     return timeSeries;
-  }.property('stats'),
+  }.property('stats', 'metric'),
 
   totalGoodwill: function() {
-    var loc;
+    var metric = this.get('metric');
     return this.get('stats').reduce(function(a, b) {
-      loc = b.loc;
-      if (!b.isPositive) {
-        loc *= -1;
-      }
-      return a + loc;
+      return a + b.get(metric);
     }, 0);
-  }.property('stats'),
+  }.property('stats', 'metric'),
 
   // TODO(azirbel): Ridiculous.
   absTotalGoodwill: function() {

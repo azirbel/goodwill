@@ -8,7 +8,7 @@ export default Ember.Route.extend({
     var repositories = this.controllerFor('application').get('repositories');
     var savedAllPRs;
 
-    // TODO(azirbel): Deal with rate limits - abstract into a helper api
+    // TODO(azirbel): Deal with rate limits & per_page - abstract into a helper api
     var repoPromises = repositories.map(function(repo) {
       var url = 'https://api.github.com/search/issues?q=type:pr' + 
         '+involves:' + username + '+repo:' + repo + '&per_page=100';

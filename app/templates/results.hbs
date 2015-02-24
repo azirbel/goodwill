@@ -1,6 +1,18 @@
 <h1 class='title'>Results & Analysis</h1>
 
 <div class='wrapper'>
+  <p>Analyzing 
+  {{select-2
+    content=metrics
+    value=metric
+    optionLabelPath='name'
+    optionValuePath='id'
+    searchEnabled=false
+  }}
+  since DATE</p>
+</div>
+
+<div class='wrapper'>
   <div class='left-2'>
     <h2>Goodwill</h2>
     <div {{bind-attr
@@ -11,7 +23,7 @@
   <div class='right-1'>
     <h2>Top Reviewers</h2>
     {{#each reviewer in topReviewers}}
-      <p>{{reviewer.username}} - {{reviewer.loc}}</p>
+      <p>{{reviewer.username}} - {{reviewer.points}}</p>
     {{/each}}
   </div>
 </div>
@@ -41,7 +53,15 @@
   <a target='_blank' {{bind-attr href='stat.htmlUrl'}} class='pr-stat'>
     <div class='left-1'>
       <div {{bind-attr class=':loc stat.isPositive:positive:negative'}}>
-        {{stat.loc}}
+        {{#if metricIsScore}}
+          {{stat.score}}
+        {{else}}
+          {{#if metricIsNum}}
+            {{stat.num}}
+          {{else}}
+            {{stat.loc}}
+          {{/if}}
+        {{/if}}
       </div>
     </div>
     <div class='right-2'>
