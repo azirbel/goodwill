@@ -2,7 +2,7 @@
   <div class='welcome-block'>
     <div class='project-title'>RECIPROCITY</div>
     <div class='tagline'>Review your GitHub code reviews</div>
-    {{link-to 'Start' 'username' class='start-btn'}}
+    {{link-to 'Start' 'step.username' class='start-btn'}}
   </div>
   <p class='more-text'>Or, read more...</p>
 </div>
@@ -10,50 +10,46 @@
   <h1>What is this?</h1>
   <p>
     Reciprocity is a little tool that measures how much you give and take when
-    it comes to code review. It's intended as an easy way to check if you're
-    spending enough time helping out your team, or if you're freeloading a bit.
+    it comes to code review. It answers the question: "do I review as much code
+    for other people as they review for me?"
   </p>
   <p>
     It only works with GitHub, but can analyze whichever repositories you
     choose - public or private.
   </p>
   <p>
-    In a nutshell, Reciprocity scans through all the pull requests in
-    repositories you want to analyze, looking for comments that contain the
-    phrase "LGTM". If you LGTM'd someone else's code, you'll get "goodwill"
-    points for each line of code. If someone else LGTM'd your code, you'll lose
-    goodwill points.
+    Reciprocity scans through all the pull requests in repositories you want to
+    analyze, looking for comments that contain the phrase "LGTM" ("looks good
+    to me"). If you approved someone else's code, you'll get "goodwill" points.
+    If someone else approved your code, you'll lose goodwill points.
   </p>
   <p>
-    There are also stats to see how you've been doing over time, see who those
-    awesome people are who review your code, and measure "large" and "small"
-    pull requests (200 lines of code). Everyone knows lines of code is kind of
-    a terrible metric.
+    Plus, cool stats! See your goodwill change over time, get a list of all the pull
+    requests you've been involved in, and "score" pull requests using a variety
+    of metrics.
   </p>
 
   <h1>How does it work?</h1>
   <p>
-    First, you'll enter your GitHub username. If you want to analyze private
-    repositories as well, you'll have to get a Personal Access Token from
-    GitHub too.
+    First, you'll enter your GitHub username, and optionally, authentication to
+    analyze private repositories.
   </p>
   <p>
-    Then, you'll pick which repositories you want from the list of your starred
-    repositories. We use starred repositories because it's not practical to
-    scan every repository you've ever worked in.
+    Then you'll pick which repositories you want to analyze.
   </p>
   <p>
     Reciprocity will scan through every pull request in each repository you
     selected. It looks for comments that contain the phrase "LGTM", and
-    determines the author and reviewer(s) in each comment. It also handles a
-    couple special cases. For example, if the author of a pull request comments
-    "LGTM", Reciprocity assumes they are making a note of a verbal LGTM someone
-    else gave. So comments like "LGTM'd by @otherdude" will attribute the LGTM
-    to "otherdude".
+    determines the pull request author and reviewer(s).
   </p>
   <p>
-    Finally, you'll see a summary of your stats and a list of all the pull
-    requests you've been involved in!
+    All of this information is then combined into analytics, so you can get a
+    big picture view of your code review contributions.
+  </p>
+  
+  <h1>More information</h1>
+  <p>
+    Check out the {{link-to 'frequently asked questions' 'faq'}} page.
   </p>
 
   <h1>About the author</h1>

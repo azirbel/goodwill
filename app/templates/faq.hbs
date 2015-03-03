@@ -1,0 +1,119 @@
+<main>
+  <h1>Frequently Asked Questions</h1>
+
+  <h2>Why use cookies?</h2>
+  <p>
+    This site stores a lot of data in cookies, including your GitHub username,
+    token, repositories you selected, and metric settings.
+  </p>
+  <p>
+    The reason it does this is to make it easy to check back, so you can see if
+    your code review habits have improved. It also makes the whole flow of the
+    application very simple. Once you've configured the app, you can return
+    directly to the results page later.
+  </p>
+  <p>
+    There is a security risk here: though this app is open-source, I might
+    write another app under the domain azirbel.github.io, redirect you there,
+    and have that app steal your cookies. This would give me read-access to
+    your GitHub. I'm sorry to subject you to this risk, but I want to keep my
+    app simple.
+  </p>
+
+  <h2>Why choose from starred repositories?</h2>
+  <p>
+    Reciprocity lets you choose repositories to analyze from a list of your
+    starred repositories.
+  </p>
+  <p>
+    The reason it uses starred repositories is a technical limitation: it just
+    isn't practical to search every comment of every repository you've touched,
+    to see where you might have left an "LGTM" comment.
+  </p>
+  <p>
+    Also, it gives you a reasonable list of repositories you might care about.
+  </p>
+
+  <h2>How do you count reviewers?</h2>
+  <p>
+    We need some way to tell who reviewed a given pull request.
+  </p>
+  <p>
+    My team uses a code word - LGTM (looks good to me) - to formally approve a
+    pull request. We don't merge unless someone has given their LGTM. This
+    makes it very easy for Reciprocity to search through comments looking for
+    the phrase "LGTM".
+  </p>
+  <p>
+    Of course, this can fail in some cases. We have to hope it evens out in the
+    end.
+  </p>
+  <p>
+    One special case that Reciprocity does handle: if the author of a pull
+    request comments on their own request, with "LGTM" and another author's
+    name, then that other author will be counted as the reviewer for that pull
+    request. This addresses a common pattern, where the author will comment
+    "verbal LGTM by @authorname".
+  </p>
+  <p>
+    If you use a phrase other than LGTM - I'm afraid I don't support that. You
+    can open an issue in my GitHub repo, or just fork this repository and add
+    your own logic.
+  </p>
+
+  <h2>What is "goodwill"?</h2>
+  <p>
+    Goodwill is a measure of your "giving back" to the team by reviewing their
+    code.
+  </p>
+  <p>
+    The number itself will vary based on what metric you are using to analyze
+    your reviews, but the idea is that positive goodwill means you've given
+    more than you've gotten, and negative goodwill means you've taken too much.
+  </p>
+
+  <h2>How much weight do you give pull requests?</h2>
+  <p>
+    To be useful, Reciprocity needs a way to estimate how much work it took you
+    (or someone else) to review a pull request.
+  </p>
+  <p>
+    The most common metric is "lines of code". That's an option with
+    Reciprocity, but it's a bad one. If you've reviewed even one huge refactor,
+    suddenly your analysis is skewed by ten thousand lines of code.
+  </p>
+  <p>
+    Below are the available metrics and what they mean.
+  </p>
+  <div class='wrapper'>
+    <div class='left-1'><p>Complexity Score</p></div>
+    <div class='right-2'><p>
+      An estimate of how much time it took to review the pull request, on a
+      scale of 1 to 12. We first score the lines of code on a scale of 1-4 (for
+      tiny, small, medium, and large changes). Then we score the number of
+      comments on a scale of 1-3 (to see how much discussion/debate/fixes were
+      required). We multiply the two numbers together to give the most weight
+      to large changes which generated lots of discussion.
+    </p></div>
+  </div>
+  <div class='wrapper'>
+    <div class='left-1'><p>Number</p></div>
+    <div class='right-2'><p>
+      A simple count of reviews: you get a point when you review someone else's
+      code, and you lose a point when someone reviews your code. For more
+      detail, there are separate counts for large and small pull requests (more
+      and less than 200 lines of code, respectively).
+    </p></div>
+  </div>
+  <div class='wrapper'>
+    <div class='left-1'><p>Lines of Code</p></div>
+    <div class='right-2'><p>
+      A measure of the lines of code touched in a pull request, calculated as
+      addtions + deletions.
+    </p></div>
+  </div>
+
+  <div class='button-block'>
+    {{link-to 'Home' 'index' class='home-btn'}}
+  </div>
+</main>

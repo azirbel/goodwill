@@ -1,0 +1,18 @@
+<main>
+  <header>
+    {{#link-to 'step.username' class='step'}}
+      <div class='circle'>1</div>
+      <div class='step-text'>User</div>
+    {{/link-to}}
+    {{#link-to 'step.repositories' class='step'}}
+      <div class='circle'>2</div>
+      <div class='step-text'>Repositories</div>
+    {{/link-to}}
+    {{#link-to 'step.results' class='step'}}
+      <div class='circle'>3</div>
+      <div class='step-text'>Results</div>
+    {{/link-to}}
+    <div class='step-bar'></div>
+  </header>
+  {{outlet}}
+</main>
