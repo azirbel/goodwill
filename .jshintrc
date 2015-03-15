@@ -3,8 +3,7 @@
     "document",
     "window",
     "-Promise",
-    "_",
-    "Cookies"
+    "_"
   ],
   "browser": true,
   "boss": true,
