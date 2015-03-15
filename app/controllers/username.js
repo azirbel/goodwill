@@ -7,8 +7,9 @@ export default Ember.Controller.extend({
   token: Ember.computed.alias('controllers.application.token'),
 
   persistenceObserver: function() {
-    Cookies.set('username', this.get('username'));
-    Cookies.set('token', this.get('token'));
+    localStorage.setItem('reciprocityUsername', this.get('username'));
+    localStorage.setItem('reciprocityToken', this.get('token'));
+    console.log('localstorage set.');
   }.observes('username', 'token'),
 
   // TODO(azirbel): Add usernameValid and tokenValid checks

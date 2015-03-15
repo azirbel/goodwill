@@ -22,7 +22,8 @@ export default Ember.Controller.extend({
   }.property('allRepositories.[]', 'selectedRepositories.[]'),
 
   persistenceObserver: function() {
-    Cookies.set('repositories', this.get('selectedRepositories'));
+    localStorage.setItem('reciprocityRepositories',
+        this.get('selectedRepositories'));
   }.on('init').observes('selectedRepositories.[]'),
 
   actions: {

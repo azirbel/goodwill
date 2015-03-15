@@ -15,7 +15,6 @@
     "ember-qunit-notifications": "0.0.5",
     "qunit": "~1.17.1",
     "lodash": "^2.4.0",
-    "cookies-js": "~1.2.1",
     "d3": "~3.5.5",
     "jquery-ui": "~1.11.3",
     "ember-charts": "~0.3.0",

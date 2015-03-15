@@ -8,20 +8,19 @@ export default Ember.Controller.extend({
 
   showIndex: false,
 
-  // TODO(azirbel): Use recirpocity-namespaced cookie names
   init: function() {
     this._super();
-    var cookieUsername = Cookies.get('username');
-    var cookieToken = Cookies.get('token');
-    var cookieRepositories = Cookies.get('repositories');
-    if (cookieUsername) {
-      this.set('username', cookieUsername);
+    var lsUsername = localStorage.getItem('reciprocityUsername');
+    var lsToken = localStorage.getItem('reciprocityToken');
+    var lsRepositories = localStorage.getItem('reciprocityRepositories');
+    if (lsUsername) {
+      this.set('username', lsUsername);
     }
-    if (cookieToken) {
-      this.set('token', cookieToken);
+    if (lsToken) {
+      this.set('token', lsToken);
     }
-    if (cookieRepositories) {
-      this.set('repositories', cookieRepositories.split(','));
+    if (lsRepositories) {
+      this.set('repositories', lsRepositories.split(','));
     }
   },
 
