@@ -1,11 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  // Persisted between steps
-  username: '',
-  token: '',
-  repositories: function() { return []; }.property(),
-
   showIndex: false,
 
   init: function() {

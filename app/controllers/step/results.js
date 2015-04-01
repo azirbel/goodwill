@@ -1,9 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ['application'],
+  username: '',
 
-  username: Ember.computed.alias('controllers.application.username'),
+  init: function() {
+    this._super();
+    this.set('username', localStorage.getItem('reciprocityUsername') || '');
+  },
 
   metrics: Ember.A([
     { name: 'Complexity Score', id: 'score' },

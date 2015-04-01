@@ -1,10 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ['application'],
+  selectedRepositories: function() {
+    return [];
+  }.property(),
 
-  selectedRepositories:
-    Ember.computed.alias('controllers.application.repositories'),
+  init: function() {
+    this._super();
+    this.set('selectedRepositories',
+        JSON.parse(localStorage.getItem('selectedRepositories') || []));
+  },
 
   allRepositories: function() {
     return (this.get('model') || []).mapBy('full_name').sort();
@@ -22,8 +27,8 @@ export default Ember.Controller.extend({
   }.property('allRepositories.[]', 'selectedRepositories.[]'),
 
   persistenceObserver: function() {
-    localStorage.setItem('reciprocityRepositories',
-        this.get('selectedRepositories'));
+    localStorage.setItem('selectedRepositories',
+        JSON.stringify(this.get('selectedRepositories')));
   }.on('init').observes('selectedRepositories.[]'),
 
   actions: {

@@ -1,11 +1,12 @@
 import Ember from 'ember';
-import GithubHelpers from '../helpers/github';
+import GithubHelpers from '../../helpers/github';
 
 export default Ember.Route.extend({
   model: function() {
-    var username = this.controllerFor('application').get('username');
-    var token = this.controllerFor('application').get('token');
-    var repositories = this.controllerFor('application').get('repositories');
+    var username = localStorage.getItem('username');
+    var token = localStorage.getItem('token');
+    var repositories =
+        JSON.parse(localStorage.getItem('selectedRepositories') || []);
     var savedAllPRs;
 
     // TODO(azirbel): Deal with rate limits & per_page - abstract into a helper api
