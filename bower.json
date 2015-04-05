@@ -15,12 +15,13 @@
     "lodash": "2.4.0",
     "d3": "3.3.9",
     "jquery-ui": "1.11.3",
-    "ember-charts": "0.3.0",
+    "ember-charts": "fcccd27ebff29e75dea668312b381cf7c08b7dbd",
     "select2": "3.5.2"
   },
   "resolutions": {
     "ember": "1.10.0",
     "jquery": "1.11.1",
-    "lodash": "2.4.0"
+    "lodash": "2.4.0",
+    "jquery-ui": "1.11.3"
   }
 }
