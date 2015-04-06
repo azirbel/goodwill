@@ -17,14 +17,8 @@
     <h2>Goodwill</h2>
     <div {{bind-attr
     class=':goodwill totalGoodwillIsPositive:positive:negative'}}>
-      {{absTotalGoodwill}}
+      {{totalGoodwill}}
     </div>
-  </div>
-  <div class='right-1'>
-    <h2>Top Reviewers</h2>
-    {{#each reviewer in topReviewers}}
-      <p>{{reviewer.username}} - {{reviewer.points}}</p>
-    {{/each}}
   </div>
 </div>
 

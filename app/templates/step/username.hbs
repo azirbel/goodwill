@@ -6,9 +6,21 @@
 
 <h2>Want to analyze private repositories?</h2>
 <p>
-  Skip this step if you're only interested in open-source repositories. If you
-  want to analyze repositories you have private access to, though, you'll need
-  to grab a private access token from GitHub.
+  You can skip this step if you only care about open-source repositories, but
+  authenticating to GitHub will allow you to see private repositories. If you
+  have a lot of data, this will also be necessary to avoid rate-limiting.
+</p>
+<p>
+  To authenticate, <a target='_blank'
+  href='https://github.com/settings/tokens/new'>generate a new Personal
+  Access Token on GitHub</a>. These tokens exist for quick and easy use;
+  you might use them if you were running a script you'd written locally.
+  Reciprocity runs a lot like a script. You only need to select "repo" and
+  "user" permissions (or stick with the defaults).
+  <a target='_blank' href='#' {{action 'goToAnchor' 'faq' 'tokens'}}>[?]</a>
+</p>
+<p>
+  Once you've generated your token, paste it below:
 </p>
 <div class='token-input'>
   {{input value=token}}

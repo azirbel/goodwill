@@ -64,10 +64,6 @@ a.pr-stat + a.pr-stat {
 
 .negative {
   color: $negative-color;
-  
-  &::before {
-    content: '-'
-  }
 }
 
 .inline-positive {

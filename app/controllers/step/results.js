@@ -68,7 +68,7 @@ export default Ember.Controller.extend({
       var isPositive = author !== username;
       var num = isPositive ? 1 : -1;
       var loc = (pr.additions + pr.deletions) * num;
-      var score = _this.calculateComplexity(comments.length, loc);
+      var score = _this.calculateComplexity(comments.length, loc) * num;
 
       var formattedReviewers = '';
       if (reviewers.length === 1) {
@@ -105,10 +105,6 @@ export default Ember.Controller.extend({
     });
   }.property('model', 'username'),
 
-  // TODO(azirbel): Override LOC/reviewers/etc in description or comments. That
-  // way you can override/clean up your report. (Recommend editing comments
-  // rather than adding new ones so people aren't notified of your OCD)
-
   // We put all reviewer usernames in lowercase
   parseReviewersFromComment: function(prAuthor, comment) {
     // If the author of the PR comments said LGTM, we assume they are tagging
@@ -143,8 +139,10 @@ export default Ember.Controller.extend({
   // The stats that are authored by, or LGTM'd by, the given user
   validStats: Ember.computed.filterBy('allStats', 'valid'),
 
-  statsSorting: ['date:desc'],
-  stats: Ember.computed.sort('validStats', 'statsSorting'),
+  statsSort: ['date:desc'],
+  statsAscendingSort: ['date:asc'],
+  stats: Ember.computed.sort('validStats', 'statsSort'),
+  statsAscending: Ember.computed.sort('validStats', 'statsAscendingSort'),
 
   prSizeStats: function() {
     var username = this.get('username');
@@ -174,43 +172,15 @@ export default Ember.Controller.extend({
     return sizeStats;
   }.property('stats', 'username'),
 
-  // Top 3 reviewers of your code
-  topReviewers: function() {
-    var username = this.get('username');
-    var metric = this.get('metric');
-    var totalsByReviewer = {};
-    var topReviewers = [];
-
-    this.get('stats').forEach(function(stat) {
-      if (stat.author !== username) {
-        return;
-      }
-      stat.reviewers.forEach(function(reviewer) {
-        if (!totalsByReviewer[reviewer]) {
-          totalsByReviewer[reviewer] = 0;
-        }
-        totalsByReviewer[reviewer] += stat.get(metric);
-      });
-    });
-
-    for (var key in totalsByReviewer) {
-      topReviewers.pushObject({
-        username: key,
-        points: totalsByReviewer[key]
-      });
-    }
-    topReviewers.sortBy('points');
-    return topReviewers.slice(0, 3);
-  }.property('stats', 'username', 'metric'),
-
   goodwillOverTime: function() {
     var metric = this.get('metric');
-    var statsAscending = this.get('stats').reverse();
+    var statsAscending = this.get('statsAscending');
     var currentGoodwill = 0;
     var timeSeries = [];
     statsAscending.forEach(function(stat) {
       currentGoodwill += stat.get(metric);
       timeSeries.pushObject({
+        // TODO(azirbel): Remove
         label: 'THING',
         time: stat.date,
         value: currentGoodwill
@@ -225,11 +195,6 @@ export default Ember.Controller.extend({
       return a + b.get(metric);
     }, 0);
   }.property('stats', 'metric'),
-
-  // TODO(azirbel): Ridiculous.
-  absTotalGoodwill: function() {
-    return Math.abs(this.get('totalGoodwill'));
-  }.property('totalGoodwill'),
 
   totalGoodwillIsPositive: function() {
     return this.get('totalGoodwill') >= 0;

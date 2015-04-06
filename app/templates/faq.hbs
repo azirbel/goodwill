@@ -1,40 +1,59 @@
 <main>
   <h1>Frequently Asked Questions</h1>
 
-  <h2>Why use cookies?</h2>
+  <h2 id='tokens'>Why do you use Personal Access Tokens?</h2>
   <p>
-    This site stores a lot of data in cookies, including your GitHub username,
-    token, repositories you selected, and metric settings.
+    GitHub created Personal Access Tokens for quick and dirty use. If you write
+    a personal script that interacts with GitHub for you, you can paste the
+    access token directly into your script so it's always authenticated.
   </p>
   <p>
-    The reason it does this is to make it easy to check back, so you can see if
-    your code review habits have improved. It also makes the whole flow of the
-    application very simple. Once you've configured the app, you can return
-    directly to the results page later.
+    This is a security hole; it's an easy way to leak all your permissions,
+    fast. To mitigate this, you can limit the permissions that each token has.
+    Reciprocity only needs read-only access (the default).
   </p>
   <p>
-    There is a security risk here: though this app is open-source, I might
-    write another app under the domain azirbel.github.io, redirect you there,
-    and have that app steal your cookies. This would give me read-access to
-    your GitHub. I'm sorry to subject you to this risk, but I want to keep my
-    app simple.
+    There is an alternative: the <a target='_blank'
+    href='https://developer.github.com/v3/oauth/#web-application-flow'>web
+    application flow</a>, where a web app will redirect you to GitHub, you
+    authenticate, and GitHub gives the website a token to use. This is a
+    smoother UX, but I didn't implement it because (1) it's a lot of work for a
+    simple site like this, and (2) it requires that the website have a secret
+    key (registered with GitHub), and since I'm hosting publicly on GitHub
+    pages, I can't create a secret key.
   </p>
 
-  <h2>Why choose from starred repositories?</h2>
+  <h2 id='localStorage'>Why store so much in localStorage?</h2>
   <p>
-    Reciprocity lets you choose repositories to analyze from a list of your
+    This site saves a lot of data to localStorage, including your GitHub
+    username, token, repositories you selected, and metric settings.
+  </p>
+  <p>
+    It does this so it's easy for you come directly back to the results page,
+    so you can see if your code review habits have improved.
+  </p>
+  <p>
+    There is a security risk here: though this app is open-source, I could
+    write another app under the domain azirbel.github.io, redirect you there,
+    and have that app steal your localStorage data. If you provided a token,
+    this would give me read-access to your GitHub.
+  </p>
+
+  <h2 id='starred'>Why use starred repositories?</h2>
+  <p>
+    Reciprocity lets you select repositories to analyze from a list of your
     starred repositories.
   </p>
   <p>
-    The reason it uses starred repositories is a technical limitation: it just
-    isn't practical to search every comment of every repository you've touched,
-    to see where you might have left an "LGTM" comment.
+    The reason we use starred repositories is a technical limitation: the
+    GitHub API doesn't a provide a way to get a list of every repository you've
+    ever committed to or commented on.
   </p>
   <p>
-    Also, it gives you a reasonable list of repositories you might care about.
+    You might as well star repositories you care about, anyway!
   </p>
 
-  <h2>How do you count reviewers?</h2>
+  <h2 id='reviewers'>How do you count reviewers?</h2>
   <p>
     We need some way to tell who reviewed a given pull request.
   </p>
@@ -61,7 +80,7 @@
     your own logic.
   </p>
 
-  <h2>What is "goodwill"?</h2>
+  <h2 id='goodwill'>What is "goodwill"?</h2>
   <p>
     Goodwill is a measure of your "giving back" to the team by reviewing their
     code.
@@ -72,7 +91,7 @@
     more than you've gotten, and negative goodwill means you've taken too much.
   </p>
 
-  <h2>How much weight do you give pull requests?</h2>
+  <h2 id='metrics'>How much weight do you give pull requests?</h2>
   <p>
     To be useful, Reciprocity needs a way to estimate how much work it took you
     (or someone else) to review a pull request.
