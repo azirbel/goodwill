@@ -5,7 +5,8 @@ module.exports = function(environment) {
     modulePrefix: 'reciprocity',
     environment: environment,
     baseURL: '/',
-    locationType: 'auto',
+    // Sadly, need hashes to host on github pages
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -49,6 +50,7 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
+  // TODO(azirbel): Change to gh-pages
   if (environment === 'production') {
     ENV.baseURL = '/reciprocity/';
   }
