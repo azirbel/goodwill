@@ -1,0 +1,9 @@
+{{#if isShowingError}}
+  <main>
+    <div class='error-bar' {{action 'hideError'}}>
+      {{errorMessage}}
+      {{fa-icon 'times'}}
+    </div>
+  </main>
+{{/if}}
+{{outlet}}

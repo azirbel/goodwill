@@ -26,3 +26,25 @@ html, body {
   font-family: 'Source Sans Pro', 'Verdana';
   font-weight: normal;
 }
+
+.error-bar {
+  padding: 10px;
+  background-color: $secondary-color-light;
+
+  .fa-times {
+    float: right;
+    padding: 1px 4px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    .fa-times {
+      color: $secondary-color;
+    }
+  }
+
+  transition: height 2s;
+  -moz-transition: height 2s; /* Firefox 4 */
+  -webkit-transition: height 2s; /* Safari and Chrome */
+  -o-transition: height 2s; /* Opera */
+}

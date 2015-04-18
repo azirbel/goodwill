@@ -14,6 +14,15 @@ export default Ember.Route.extend({
           }, 0);              
         });
       });
+    },
+
+    showError: function(errorMessage) {
+      this.controller.set('isShowingError', true);
+      this.controller.set('errorMessage', errorMessage);
+    },
+
+    hideError: function() {
+      this.controller.set('isShowingError', false);
     }
   }
 });

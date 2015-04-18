@@ -7,6 +7,8 @@ $primary-color-dark: #3E1B90;
 $primary-color-light: lighten($primary-color, 20%);
 $primary-color-superlight: lighten($primary-color, 30%);
 
+$secondary-color-light: lighten($secondary-color, 20%);
+
 // Applications of color
 // ----------------------------------------------------------------------------
 $dark-btn-color: $primary-color-dark;
