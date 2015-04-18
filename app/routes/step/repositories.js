@@ -3,8 +3,8 @@ import GithubHelpers from '../../helpers/github';
 
 export default Ember.Route.extend({
   model: function() {
-    var username = localStorage.getItem('username');
-    var token = localStorage.getItem('token');
+    var username = localStorage.getItem('githubUsername');
+    var token = localStorage.getItem('githubToken');
 
     var url = 'https://api.github.com/users/' + username +
       '/starred?per_page=100';

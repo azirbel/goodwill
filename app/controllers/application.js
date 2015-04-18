@@ -3,22 +3,6 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   showIndex: false,
 
-  init: function() {
-    this._super();
-    var lsUsername = localStorage.getItem('reciprocityUsername');
-    var lsToken = localStorage.getItem('reciprocityToken');
-    var lsRepositories = localStorage.getItem('reciprocityRepositories');
-    if (lsUsername) {
-      this.set('username', lsUsername);
-    }
-    if (lsToken) {
-      this.set('token', lsToken);
-    }
-    if (lsRepositories) {
-      this.set('repositories', lsRepositories.split(','));
-    }
-  },
-
   // Scroll to the top of pages when we switch routes
   currentPathChanged: function () {
     window.scrollTo(0, 0);

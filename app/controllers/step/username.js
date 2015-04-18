@@ -6,13 +6,13 @@ export default Ember.Controller.extend({
 
   init: function() {
     this._super();
-    this.set('username', localStorage.getItem('username') || '');
-    this.set('token', localStorage.getItem('token') || '');
+    this.set('username', localStorage.getItem('githubUsername') || '');
+    this.set('token', localStorage.getItem('githubToken') || '');
   },
 
   persistenceObserver: function() {
-    localStorage.setItem('username', this.get('username'));
-    localStorage.setItem('token', this.get('token'));
+    localStorage.setItem('githubUsername', this.get('username'));
+    localStorage.setItem('githubToken', this.get('token'));
   }.observes('username', 'token'),
 
   // TODO(azirbel): Add usernameValid and tokenValid checks

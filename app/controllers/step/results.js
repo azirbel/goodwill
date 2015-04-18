@@ -3,11 +3,11 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   username: '',
 
-  // TODO(azirbel): Usename isn't updated here, if init was already called on
+  // TODO(azirbel): Username isn't updated here, if init was already called on
   // this singleton controller
   init: function() {
     this._super();
-    this.set('username', localStorage.getItem('username') || '');
+    this.set('username', localStorage.getItem('githubUsername') || '');
   },
 
   metrics: Ember.A([
