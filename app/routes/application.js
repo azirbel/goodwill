@@ -17,8 +17,11 @@ export default Ember.Route.extend({
     },
 
     showError: function(errorMessage) {
-      this.controller.set('isShowingError', true);
-      this.controller.set('errorMessage', errorMessage);
+      var _this = this;
+      Ember.run.next(function() {
+        _this.controller.set('isShowingError', true);
+        _this.controller.set('errorMessage', errorMessage);
+      });
     },
 
     hideError: function() {

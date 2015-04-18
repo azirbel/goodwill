@@ -25,7 +25,6 @@ export default Ember.Route.extend({
     });
 
     return ValidationHelpers.validateUser(username, token).then(function() {
-      _this.send('hideError');
       return Ember.RSVP.all(repoPromises).then(function(allIssuesByRepo) {
         var allIssues = allIssuesByRepo.reduce(function(a, b) {
           return a.concat(b.items);
@@ -50,5 +49,9 @@ export default Ember.Route.extend({
       // got; we just assume it was a login error from the first step.
       _this.transitionTo('step.username');
     });
-  }
+  },
+
+  hideErrors: function() {
+    this.send('hideError');
+  }.on('deactivate')
 });

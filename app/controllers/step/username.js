@@ -14,7 +14,4 @@ export default Ember.Controller.extend({
     localStorage.setItem('githubUsername', this.get('username'));
     localStorage.setItem('githubToken', this.get('token'));
   }.observes('username', 'token'),
-
-  // TODO(azirbel): Add usernameValid and tokenValid checks
-  // TODO(azirbel): Add usernameErrorText and tokenErrorText
 });

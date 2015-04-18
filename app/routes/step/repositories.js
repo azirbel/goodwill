@@ -12,14 +12,10 @@ export default Ember.Route.extend({
       '/starred?per_page=100';
 
     return ValidationHelpers.validateUser(username, token).then(function() {
-      _this.send('hideError');
       return GithubHelpers.ajax(url, token);
     }, function(reason) {
-      console.log('sending showError.');
       _this.send('showError', reason);
       _this.transitionTo('step.username');
-      // TODO(azirbel): Try this again
-      //return GithubHelpers.ajax(url, token);
     });
   },
 
@@ -31,5 +27,9 @@ export default Ember.Route.extend({
           return model.mapBy('full_name').contains(repository);
         })
     );
-  }
+  },
+
+  hideErrors: function() {
+    this.send('hideError');
+  }.on('deactivate')
 });

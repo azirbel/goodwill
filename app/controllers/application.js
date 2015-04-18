@@ -9,11 +9,5 @@ export default Ember.Controller.extend({
   // Scroll to the top of pages when we switch routes
   currentPathChanged: function () {
     window.scrollTo(0, 0);
-  }.observes('currentPath'),
-
-  actions: {
-    hideError: function() {
-      this.set('isShowingError', false);
-    }
-  }
+  }.observes('currentPath')
 });
