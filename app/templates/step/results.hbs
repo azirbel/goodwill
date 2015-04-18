@@ -15,7 +15,7 @@
 
 <div class='wrapper'>
   <div class='center'>
-    <h2 class='nomargin'>Goodwill
+    <h2 class='goodwill'>Goodwill
     <a href='#' {{action 'goToAnchor' 'faq' 'goodwill'}}>[?]</a>
     </h2>
     <div {{bind-attr
@@ -31,20 +31,22 @@
   }}
 </div>
 
-<div class="wrapper">
-  <p>
-    Large pull requests: You authored
-    <span class='inline-positive'>{{prSizeStats.large.negative}}</span>
-    and reviewed
-    <span class='inline-negative'>{{prSizeStats.large.positive}}</span>.
-  </p>
-  <p>
-    Small pull requests: You authored
-    <span class='inline-positive'>{{prSizeStats.small.negative}}</span>
-    and reviewed
-    <span class='inline-negative'>{{prSizeStats.small.positive}}</span>.
-  </p>
-</div>
+{{#if metricIsNum}}
+  <div class="wrapper">
+    <p>
+      Large pull requests: You authored
+      <span class='inline-negative'>{{prSizeStats.large.negative}}</span>
+      and reviewed
+      <span class='inline-positive'>{{prSizeStats.large.positive}}</span>.
+    </p>
+    <p>
+      Small pull requests: You authored
+      <span class='inline-negative'>{{prSizeStats.small.negative}}</span>
+      and reviewed
+      <span class='inline-positive'>{{prSizeStats.small.positive}}</span>.
+    </p>
+  </div>
+{{/if}}
 
 {{#each stat in stats}}
   <a target='_blank' {{bind-attr href='stat.htmlUrl'}} class='pr-stat'>
@@ -63,9 +65,11 @@
     </div>
     <div class='right-2'>
       {{#if stat.isPositive}}
-        <h4>You reviewed a pull request by {{stat.author}}</h4>
+        <h4>
+          You reviewed a pull request by <strong>{{stat.author}}</strong>
+        </h4>
       {{else}}
-        <h4>{{stat.formattedReviewers}} reviewed your pull request</h4>
+        <h4>{{{stat.formattedReviewers}}} reviewed your pull request</h4>
       {{/if}}
       <h4>{{stat.formattedDate}} in {{stat.repoName}}</h4>
     </div>

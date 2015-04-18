@@ -73,13 +73,16 @@ export default Ember.Controller.extend({
       var score = _this.calculateComplexity(comments.length, loc) * num;
 
       var formattedReviewers = '';
-      if (reviewers.length === 1) {
-        formattedReviewers = reviewers[0];
-      } else if (reviewers.length === 2) {
-        formattedReviewers = reviewers.join(' and ');
-      } else if (reviewers.length > 2) {
-        formattedReviewers = reviewers.slice(0, -1).join(', ') +
-          ', and ' + reviewers[reviewers.length - 1];
+      var wrappedReviewers = reviewers.map(function(reviewer) {
+        return '<strong>' + reviewer + '</strong>';
+      });
+      if (wrappedReviewers.length === 1) {
+        formattedReviewers = wrappedReviewers[0];
+      } else if (wrappedReviewers.length === 2) {
+        formattedReviewers = wrappedReviewers.join(' and ');
+      } else if (wrappedReviewers.length > 2) {
+        formattedReviewers = wrappedReviewers.slice(0, -1).join(', ') +
+          ', and ' + wrappedReviewers[wrappedReviewers.length - 1];
       }
 
       var date = new Date(pr.created_at);
@@ -174,22 +177,59 @@ export default Ember.Controller.extend({
     return sizeStats;
   }.property('stats', 'username'),
 
+  // Special chart for the "number of PRs" analysis
+  prCountOverTime: function() {
+    var statsAscending = this.get('statsAscending');
+    var counts = {
+      total: 0,
+      small: 0,
+      large: 0
+    };
+    var timeSeries = [];
+    statsAscending.forEach(function(stat) {
+      counts.total += stat.get('num');
+      timeSeries.pushObject({
+        label: 'Total',
+        time: stat.date,
+        value: counts.total
+      });
+      if (stat.loc < 200) {
+        counts.small += stat.get('num');
+        timeSeries.pushObject({
+          label: 'Small',
+          time: stat.date,
+          value: counts.small
+        });
+      } else {
+        counts.large += stat.get('num');
+        timeSeries.pushObject({
+          label: 'Large',
+          time: stat.date,
+          value: counts.large
+        });
+      }
+    });
+    return timeSeries;
+  }.property('statsAscending'),
+
   goodwillOverTime: function() {
     var metric = this.get('metric');
+    if (metric === 'num') {
+      return this.get('prCountOverTime');
+    }
     var statsAscending = this.get('statsAscending');
     var currentGoodwill = 0;
     var timeSeries = [];
     statsAscending.forEach(function(stat) {
       currentGoodwill += stat.get(metric);
       timeSeries.pushObject({
-        // TODO(azirbel): Remove
-        label: 'THING',
+        label: 'Goodwill',
         time: stat.date,
         value: currentGoodwill
       });
     });
     return timeSeries;
-  }.property('stats', 'metric'),
+  }.property('statsAscending', 'metric'),
 
   totalGoodwill: function() {
     var metric = this.get('metric');

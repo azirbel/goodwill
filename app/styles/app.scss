@@ -24,7 +24,11 @@ html, body {
 
 * {
   font-family: 'Source Sans Pro', 'Verdana';
-  font-weight: normal;
+  font-weight: 300;
+
+  strong {
+    font-weight: normal;
+  }
 }
 
 .error-bar {
