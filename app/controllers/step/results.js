@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  queryParams: ['metric'],
+
   username: '',
 
   // TODO(azirbel): Username isn't updated here, if init was already called on
@@ -62,6 +64,7 @@ export default Ember.Controller.extend({
       var pr = prAndComments[0];
       var comments = prAndComments[1];
 
+      var date = new Date(pr.created_at);
       var author = pr.user.login;
       var reviewers = _this.getReviewersFromComments(author, comments);
       var valid = (reviewers.length > 0) &&
@@ -84,11 +87,6 @@ export default Ember.Controller.extend({
         formattedReviewers = wrappedReviewers.slice(0, -1).join(', ') +
           ', and ' + wrappedReviewers[wrappedReviewers.length - 1];
       }
-
-      var date = new Date(pr.created_at);
-
-      // TODO(azirbel): Fix the issue where you comment on your own PR saying
-      // it is LGTM'd by someone else. Possibly we can parse this automatically
 
       return Ember.Object.create({
         repoName: pr.base.repo.full_name,
@@ -149,34 +147,6 @@ export default Ember.Controller.extend({
   stats: Ember.computed.sort('validStats', 'statsSort'),
   statsAscending: Ember.computed.sort('validStats', 'statsAscendingSort'),
 
-  prSizeStats: function() {
-    var username = this.get('username');
-    var sizeStats = {
-      large: {
-        positive: 0,
-        negative: 0
-      },
-      small: {
-        positive: 0,
-        negative: 0
-      }
-    };
-    var positiveFlag;
-    var largeFlag;
-    this.get('stats').forEach(function(stat) {
-      positiveFlag = 'positive';
-      largeFlag = 'large';
-      if (stat.loc < 200) {
-        largeFlag = 'small';
-      }
-      if (stat.author === username) {
-        positiveFlag = 'negative';
-      }
-      sizeStats[largeFlag][positiveFlag] += 1;
-    });
-    return sizeStats;
-  }.property('stats', 'username'),
-
   // Special chart for the "number of PRs" analysis
   prCountOverTime: function() {
     var statsAscending = this.get('statsAscending');
@@ -188,26 +158,18 @@ export default Ember.Controller.extend({
     var timeSeries = [];
     statsAscending.forEach(function(stat) {
       counts.total += stat.get('num');
-      timeSeries.pushObject({
-        label: 'Total',
-        time: stat.date,
-        value: counts.total
-      });
       if (stat.loc < 200) {
         counts.small += stat.get('num');
-        timeSeries.pushObject({
-          label: 'Small',
-          time: stat.date,
-          value: counts.small
-        });
       } else {
         counts.large += stat.get('num');
-        timeSeries.pushObject({
-          label: 'Large',
-          time: stat.date,
-          value: counts.large
-        });
       }
+      ['Total', 'Small', 'Large'].forEach(function(size) {
+        timeSeries.pushObject({
+          label: size,
+          time: stat.date,
+          value: counts[size.toLowerCase()]
+        });
+      });
     });
     return timeSeries;
   }.property('statsAscending'),

@@ -28,25 +28,9 @@
 <div class="wrapper">
   {{time-series-chart
     lineData=goodwillOverTime
+    selectedSeedColor='rgb(62,27,144)'
   }}
 </div>
-
-{{#if metricIsNum}}
-  <div class="wrapper">
-    <p>
-      Large pull requests: You authored
-      <span class='inline-negative'>{{prSizeStats.large.negative}}</span>
-      and reviewed
-      <span class='inline-positive'>{{prSizeStats.large.positive}}</span>.
-    </p>
-    <p>
-      Small pull requests: You authored
-      <span class='inline-negative'>{{prSizeStats.small.negative}}</span>
-      and reviewed
-      <span class='inline-positive'>{{prSizeStats.small.positive}}</span>.
-    </p>
-  </div>
-{{/if}}
 
 {{#each stat in stats}}
   <a target='_blank' {{bind-attr href='stat.htmlUrl'}} class='pr-stat'>
