@@ -14,6 +14,11 @@
   width: 33.33%;
 }
 
+.center {
+  text-align: center;
+
+}
+
 .goodwill {
   font-size: 56px;
 }
@@ -74,6 +79,33 @@ a.pr-stat + a.pr-stat {
   color: $negative-color;
 }
 
+// Select-2
+
 .select2-container {
   width: 180px;
+  background: none;
+  border-radius: 0;
+
+  .select2-choice {
+    border-color: $primary-color;
+    border-radius: 0;
+    background: none;
+
+    .select2-arrow {
+      background: none;
+      border-left: none;
+    }
+  }
+}
+
+.select2-container-active {
+  border-color: $primary-color;
+}
+
+.select2-drop-active {
+  border-color: $primary-color;
+}
+
+.select2-drop {
+  border-radius: 0;
 }

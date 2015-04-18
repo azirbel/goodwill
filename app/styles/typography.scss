@@ -63,6 +63,10 @@ h2 {
   margin: 32px 0 24px 0;
 }
 
+h2.nomargin {
+  margin: 0;
+}
+
 p {
   @include standard-text;
   margin: 24px 0 32px 0;

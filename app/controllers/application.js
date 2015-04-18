@@ -19,6 +19,11 @@ export default Ember.Controller.extend({
     }
   },
 
+  // Scroll to the top of pages when we switch routes
+  currentPathChanged: function () {
+    window.scrollTo(0, 0);
+  }.observes('currentPath'),
+
   // TODO(azirbel): Move this stuff
   // TODO(azirbel): Trigger this stuff on enter, button press, and focusOut
   usernameValid: false,

@@ -9,12 +9,15 @@
     optionValuePath='id'
     searchEnabled=false
   }}
+  <a href='#' {{action 'goToAnchor' 'faq' 'metrics'}}>[?]</a>
   </p>
 </div>
 
 <div class='wrapper'>
-  <div class='left-2'>
-    <h2>Goodwill</h2>
+  <div class='center'>
+    <h2 class='nomargin'>Goodwill
+    <a href='#' {{action 'goToAnchor' 'faq' 'goodwill'}}>[?]</a>
+    </h2>
     <div {{bind-attr
     class=':goodwill totalGoodwillIsPositive:positive:negative'}}>
       {{totalGoodwill}}
