@@ -237,7 +237,6 @@ define('reciprocity/controllers/step/results', ['exports', 'ember'], function (e
       }
     },
 
-    // TODO(azirbel): Write tests for this!
     getReviewersFromComments: function getReviewersFromComments(author, comments) {
       var _this = this;
       var lgtmComments = comments.filter(function (comment) {
@@ -460,14 +459,14 @@ define('reciprocity/helpers/github', ['exports', 'ic-ajax'], function (exports, 
   exports['default'] = { ajax: ajax };
 
 });
-define('reciprocity/helpers/validation', ['exports', 'reciprocity/helpers/github'], function (exports, GithubHelpers) {
+define('reciprocity/helpers/validation', ['exports', 'ember', 'reciprocity/helpers/github'], function (exports, Ember, GithubHelpers) {
 
   'use strict';
 
   function validateUser(username) {
     var token = arguments[1] === undefined ? null : arguments[1];
 
-    return new Promise(function (resolve, reject) {
+    return new Ember['default'].RSVP.Promise(function (resolve, reject) {
       if (!token) {
         GithubHelpers['default'].ajax("https://api.github.com/users/" + username).then(function () {
           resolve();
@@ -557,10 +556,6 @@ define('reciprocity/routes/application', ['exports', 'ember'], function (exports
 
   exports['default'] = Ember['default'].Route.extend({
     actions: {
-      // Workaround to allow linking to an anchor on another page
-      // TODO(azirbel): Remove
-      goToAnchor: function goToAnchor(route, anchor) {},
-
       showError: function showError(errorMessage) {
         var _this = this;
         Ember['default'].run.next(function () {
@@ -1304,7 +1299,7 @@ define('reciprocity/templates/index', ['exports'], function (exports) {
         var el2 = dom.createTextNode("\n\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("h1");
-        var el3 = dom.createTextNode("About the author");
+        var el3 = dom.createTextNode("About the author & project");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n  ");
@@ -1325,6 +1320,19 @@ define('reciprocity/templates/index', ['exports'], function (exports) {
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode(" on Twitter.\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("p");
+        var el3 = dom.createTextNode("\n    This project is open-source;\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3,"href","https://github.com/azirbel/reciprocity");
+        var el4 = dom.createTextNode("check it out on GitHub.");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n  ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
@@ -1385,7 +1393,7 @@ define('reciprocity/templates/loading', ['exports'], function (exports) {
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("img");
         dom.setAttribute(el1,"class","loading");
-        dom.setAttribute(el1,"src","/assets/images/loading.gif");
+        dom.setAttribute(el1,"src","assets/images/loading.gif");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
@@ -1653,7 +1661,7 @@ define('reciprocity/templates/step/loading', ['exports'], function (exports) {
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("img");
         dom.setAttribute(el1,"class","loading");
-        dom.setAttribute(el1,"src","/assets/images/loading.gif");
+        dom.setAttribute(el1,"src","assets/images/loading.gif");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
@@ -2655,7 +2663,7 @@ define('reciprocity/tests/helpers/validation.jshint', function () {
 
   module('JSHint - helpers');
   test('helpers/validation.js should pass jshint', function() { 
-    ok(false, 'helpers/validation.js should pass jshint.\nhelpers/validation.js: line 12, col 14, \'Promise\' is not defined.\n\n1 error'); 
+    ok(true, 'helpers/validation.js should pass jshint.'); 
   });
 
 });
@@ -2675,7 +2683,7 @@ define('reciprocity/tests/routes/application.jshint', function () {
 
   module('JSHint - routes');
   test('routes/application.js should pass jshint', function() { 
-    ok(false, 'routes/application.js should pass jshint.\nroutes/application.js: line 7, col 33, \'anchor\' is defined but never used.\nroutes/application.js: line 7, col 26, \'route\' is defined but never used.\n\n2 errors'); 
+    ok(true, 'routes/application.js should pass jshint.'); 
   });
 
 });
@@ -2764,7 +2772,7 @@ catch(err) {
 if (runningTests) {
   require("reciprocity/tests/test-helper");
 } else {
-  require("reciprocity/app")["default"].create({"name":"reciprocity","version":"0.3.0.945bb874"});
+  require("reciprocity/app")["default"].create({"name":"reciprocity","version":"0.3.1.07939275"});
 }
 
 /* jshint ignore:end */
