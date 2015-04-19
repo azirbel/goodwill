@@ -1,6 +1,6 @@
 {
   "name": "reciprocity",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Review your GitHub code reviews",
   "private": true,
   "directories": {
