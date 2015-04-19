@@ -1,0 +1,331 @@
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("/assets/fonts/SourceSansPro-Regular.otf") format("opentype"); }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  src: url("/assets/fonts/SourceSansPro-Light.otf") format("opentype"); }
+
+a {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 300;
+  color: #8862e2; }
+  a:link, a:visited, a:active {
+    text-decoration: none; }
+  a:hover {
+    text-decoration: underline; }
+
+.project-header {
+  font-size: 64px;
+  margin-bottom: 20px; }
+
+.description {
+  font-size: 24px;
+  color: #c9b8f2;
+  width: 600px;
+  margin: auto;
+  margin-bottom: 16px; }
+
+h1 {
+  font-size: 32px;
+  font-weight: normal;
+  margin: 48px 0 24px 0; }
+
+h1.title {
+  margin-top: 32px; }
+
+h2 {
+  font-size: 24px;
+  font-weight: normal;
+  margin: 32px 0 24px 0; }
+
+h2.goodwill {
+  margin: 0; }
+
+p {
+  font-size: 18px;
+  line-height: 28px;
+  margin: 24px 0 32px 0; }
+
+p.last {
+  margin-bottom: 12px; }
+
+main {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  position: relative; }
+
+header {
+  overflow: hidden;
+  text-align: center;
+  position: relative; }
+  header a.step {
+    position: relative;
+    float: left;
+    width: 33.33%;
+    color: #3E1B90; }
+    header a.step:hover {
+      text-decoration: none;
+      color: #3E1B90; }
+      header a.step:hover .circle {
+        background-color: #eae3fa; }
+    header a.step.active .circle {
+      background-color: #3E1B90;
+      color: #fff; }
+  header .circle {
+    font-weight: normal;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #3E1B90;
+    border-radius: 50%;
+    line-height: 40px;
+    background-color: #fff;
+    z-index: 2; }
+  header .step-text {
+    margin-top: 6px;
+    font-weight: 300; }
+  header .step + .step::after {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    left: -50%;
+    top: 20px;
+    height: 0px;
+    border: 1px solid #3E1B90;
+    z-index: 1; }
+
+.loading {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 120px; }
+
+.button-block {
+  overflow: hidden;
+  margin: 30px 0;
+  height: 30px; }
+
+.back-btn {
+  position: absolute;
+  left: 0;
+  width: 33.33%;
+  background-color: #3E1B90;
+  color: #fff;
+  text-align: center;
+  line-height: 30px; }
+  .back-btn:hover {
+    text-decoration: none;
+    background-color: #8862e2;
+    color: #fff; }
+
+.back-btn::before {
+  content: '< '; }
+
+.home-btn {
+  position: absolute;
+  left: 33.33%;
+  width: 33.33%;
+  text-align: center; }
+
+.next-btn {
+  position: absolute;
+  right: 0;
+  width: 33.33%;
+  background-color: #3E1B90;
+  color: #fff;
+  text-align: center;
+  line-height: 30px; }
+  .next-btn:hover {
+    text-decoration: none;
+    background-color: #8862e2;
+    color: #fff; }
+
+.next-btn::after {
+  content: ' >'; }
+
+.welcome {
+  height: 100vh;
+  background-color: #3E1B90;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  color: #fff; }
+
+.welcome-block {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%); }
+
+.start-btn {
+  background-color: #eae3fa;
+  line-height: 30px;
+  padding: 15px 30px;
+  margin-top: 24px;
+  display: inline-block;
+  font-size: 32px;
+  color: #3E1B90; }
+  .start-btn:hover {
+    text-decoration: none;
+    background-color: #fff;
+    color: #8862e2; }
+
+.more-text {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  margin: 0; }
+
+main.index {
+  margin-bottom: 80px; }
+
+input {
+  font-size: 18px;
+  line-height: 28px;
+  width: 100%;
+  padding-left: 6px; }
+
+.repository {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  cursor: pointer; }
+  .repository:hover {
+    background-color: #eae3fa; }
+  .repository.checked {
+    background-color: #c9b8f2; }
+  .repository .fa {
+    width: 16px;
+    margin-top: 1px; }
+  .repository .repo-name {
+    font-size: 18px;
+    line-height: 28px; }
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden; }
+
+.left-2 {
+  float: left;
+  width: 66.66%; }
+
+.right-1 {
+  float: left;
+  width: 33.33%; }
+
+.center {
+  text-align: center; }
+
+.goodwill {
+  font-size: 56px; }
+
+a.pr-stat {
+  position: relative;
+  border: 1px solid #8862e2;
+  overflow: hidden;
+  display: block;
+  color: #000; }
+  a.pr-stat:hover {
+    background-color: #eae3fa; }
+
+a.pr-stat + a.pr-stat {
+  margin-top: 20px; }
+
+.left-1 {
+  float: left;
+  width: 33.33%; }
+
+.right-2 {
+  float: left;
+  width: 66.66%; }
+
+.loc {
+  height: 100%;
+  line-height: 112px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: 48px; }
+
+.positive {
+  color: #8862e2; }
+  .positive::before {
+    content: "+"; }
+
+.negative {
+  color: #D080EC; }
+
+.inline-positive {
+  color: #8862e2; }
+
+.inline-negative {
+  color: #D080EC; }
+
+.select2-container {
+  width: 180px;
+  background: none;
+  border-radius: 0; }
+  .select2-container .select2-choice {
+    border-color: #8862e2;
+    border-radius: 0;
+    background: none; }
+    .select2-container .select2-choice .select2-arrow {
+      background: none;
+      border-left: none; }
+
+.select2-container-active {
+  border-color: #8862e2; }
+
+.select2-drop-active {
+  border-color: #8862e2; }
+
+.select2-drop {
+  border-radius: 0; }
+
+html {
+  overflow-y: scroll; }
+
+html, body {
+  margin: 0;
+  padding: 0; }
+
+* {
+  font-family: 'Source Sans Pro', 'Verdana';
+  font-weight: 300; }
+  * strong {
+    font-weight: normal; }
+
+::selection {
+  background-color: #f1d9f9; }
+
+::-moz-selection {
+  background-color: #f1d9f9; }
+
+.error-bar {
+  padding: 10px;
+  background-color: #f1d9f9;
+  transition: height 2s;
+  -moz-transition: height 2s;
+  /* Firefox 4 */
+  -webkit-transition: height 2s;
+  /* Safari and Chrome */
+  -o-transition: height 2s;
+  /* Opera */ }
+  .error-bar .fa-times {
+    float: right;
+    padding: 1px 4px; }
+  .error-bar:hover {
+    cursor: pointer; }
+    .error-bar:hover .fa-times {
+      color: #D080EC; }
