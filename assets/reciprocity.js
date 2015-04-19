@@ -2775,7 +2775,7 @@ catch(err) {
 if (runningTests) {
   require("reciprocity/tests/test-helper");
 } else {
-  require("reciprocity/app")["default"].create({"name":"reciprocity","version":"0.3.2.6630e13a"});
+  require("reciprocity/app")["default"].create({"name":"reciprocity","version":"0.3.3.094ad028"});
 }
 
 /* jshint ignore:end */
