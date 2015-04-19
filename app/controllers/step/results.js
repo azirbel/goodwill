@@ -124,7 +124,6 @@ export default Ember.Controller.extend({
     }
   },
 
-  // TODO(azirbel): Write tests for this!
   getReviewersFromComments: function(author, comments) {
     var _this = this;
     var lgtmComments = comments.filter(function(comment) {

@@ -1,53 +1,40 @@
 # Reciprocity
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+Reciprocity is a little tool that measures how much you give and take when it
+comes to code review. It answers the question: "do I review as much code for
+other people as they review for me?"
 
-## Prerequisites
+Try it out, or learn more, at
+[azirbel.github.io/reciprocity](http://azirbel.github.io/reciprocity/)!
 
-You will need the following things properly installed on your computer.
+## History
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
-* [Ember CLI](http://www.ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+This project started after I got very behind on reviewing pull requests.
+Following the principle "if you cannot measure it, you cannot improve it", I
+wanted to make sure to track my code reviews so I wouldn't get behind again.
 
-## Installation
+Here's Reciprocity's analysis of my code reviews at Addepar. I've improved!
 
-* `git clone <repository-url>` this repository
-* change into the new directory
+![Number of code reviews](/../screenshots/azirbel-graph.png?raw=true)
+
+## Setup for Development
+
+Reciprocity is an Ember app. You'll need git, node, bower, and ember-cli.
+
+* `git clone git@github.com:azirbel/reciprocity.git`
+* `cd reciprocity`
 * `npm install`
 * `bower install`
 
 ## Running / Development
 
 * `ember server`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+* Visit at [http://localhost:4200](http://localhost:4200).
 
-### Code Generators
+## Releasing a New Version
 
-Make use of the many generators for code, try `ember help generate` for more details
+* `grunt release-it:X.Y.Z`
 
-### Running Tests
+## License
 
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](http://emberjs.com/)
-* [ember-cli](http://www.ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
-
+MIT. See the [license file](LICENSE).
