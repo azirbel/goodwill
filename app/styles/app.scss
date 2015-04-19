@@ -31,6 +31,14 @@ html, body {
   }
 }
 
+::selection {
+  background-color: $secondary-color-light;
+}
+
+::-moz-selection {
+  background-color: $secondary-color-light;
+}
+
 .error-bar {
   padding: 10px;
   background-color: $secondary-color-light;

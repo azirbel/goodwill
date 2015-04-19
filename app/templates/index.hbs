@@ -1,7 +1,10 @@
 <div class='welcome'>
   <div class='welcome-block'>
-    <div class='project-title'>RECIPROCITY</div>
-    <div class='tagline'>Review your GitHub code reviews</div>
+    <div class='project-header'>Review Your Code Reviews</div>
+    <div class='description'>
+      A self-assessment to see if you reviewed as much code for your team as
+      they reviewed for you (GitHub only).
+    </div>
     {{link-to 'Start' 'step.username' class='start-btn'}}
   </div>
   <p class='more-text'>Or, read more...</p>
@@ -20,8 +23,8 @@
   <p>
     Reciprocity scans through all the pull requests in repositories you want to
     analyze, looking for comments that contain the phrase "LGTM" ("looks good
-    to me"). If you approved someone else's code, you'll get "goodwill" points.
-    If someone else approved your code, you'll lose goodwill points.
+    to me"). If you reviewed someone else's code, you'll get "goodwill" points.
+    If someone else reviewed your code, you'll lose goodwill points.
     {{link-to '[?]' 'faq' (query-params anchor='goodwill')}}
   </p>
   <p>
@@ -33,7 +36,7 @@
 
   <h1>How does it work?</h1>
   <p>
-    First, you'll enter your GitHub username, and optionally, authentication to
+    First, you'll enter your GitHub username and, optionally, authentication to
     analyze private repositories.
   </p>
   <p>

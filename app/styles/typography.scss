@@ -37,15 +37,17 @@ a {
   }
 }
 
-.project-title {
-  font-family: 'Zantroke';
-  letter-spacing: 2px;
-  font-size: 72px;
+.project-header {
+  font-size: 64px;
+  margin-bottom: 20px;
 }
 
-.tagline {
+.description {
   font-size: 24px;
   color: $primary-color-light;
+  width: 600px;
+  margin: auto;
+  margin-bottom: 16px;
 }
 
 h1 {

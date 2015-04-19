@@ -1,5 +1,6 @@
 <main>
   <h1>Frequently Asked Questions</h1>
+  {{link-to '← Back to home' 'index'}}
 
   <h2 id='tokens'>Why do you use Personal Access Tokens?</h2>
   <p>
@@ -64,20 +65,20 @@
     the phrase "LGTM".
   </p>
   <p>
-    Of course, this can fail in some cases. We have to hope it evens out in the
-    end.
+    Of course, this approach can fail. But if we're lucky, mistakes will
+    cancel out.
   </p>
   <p>
     One special case that Reciprocity does handle: if the author of a pull
     request comments on their own request, with "LGTM" and another author's
     name, then that other author will be counted as the reviewer for that pull
-    request. This addresses a common pattern, where the author will comment
-    "verbal LGTM by @authorname".
+    request. This addresses a common pattern: the author commenting "verbal
+    LGTM by @otherperson".
   </p>
   <p>
-    If you use a phrase other than LGTM - I'm afraid I don't support that. You
-    can open an issue in my GitHub repo, or just fork this repository and add
-    your own logic.
+    If you use a phrase other than LGTM... I'm afraid Reciprocity don't support
+    that right now. You can open an issue in my GitHub repo, or just fork this
+    repository and add your own logic.
   </p>
 
   <h2 id='goodwill'>What is "goodwill"?</h2>
@@ -119,7 +120,7 @@
     <div class='left-1'><p>Number</p></div>
     <div class='right-2'><p>
       A simple count of reviews: you get a point when you review someone else's
-      code, and you lose a point when someone reviews your code. For more
+      code, and you lose a point when someone reviews your code. For extra
       detail, there are separate counts for large and small pull requests (more
       and less than 200 lines of code, respectively).
     </p></div>
