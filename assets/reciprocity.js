@@ -81,7 +81,10 @@ define('reciprocity/controllers/step/repositories', ['exports', 'ember'], functi
 
     init: function init() {
       this._super();
-      this.set("selectedRepositories", JSON.parse(localStorage.getItem("selectedRepositories") || []));
+      var repositories = localStorage.getItem("selectedRepositories");
+      if (repositories) {
+        this.set("selectedRepositories", JSON.parse(repositories));
+      }
     },
 
     allRepositories: (function () {
@@ -2772,7 +2775,7 @@ catch(err) {
 if (runningTests) {
   require("reciprocity/tests/test-helper");
 } else {
-  require("reciprocity/app")["default"].create({"name":"reciprocity","version":"0.3.1.07939275"});
+  require("reciprocity/app")["default"].create({"name":"reciprocity","version":"0.3.2.6630e13a"});
 }
 
 /* jshint ignore:end */
