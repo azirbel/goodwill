@@ -12,11 +12,6 @@
   src: url('/assets/fonts/SourceSansPro-Light.otf') format('opentype');
 }
 
-@font-face {
-  font-family: 'Zantroke';
-  src: url('/assets/fonts/Zantroke.otf') format('opentype');
-}
-
 @mixin standard-text {
   font-size: 18px;
   line-height: 28px;
