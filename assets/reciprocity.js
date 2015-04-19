@@ -70,6 +70,21 @@ define('reciprocity/controllers/faq', ['exports', 'ember'], function (exports, E
   });
 
 });
+define('reciprocity/controllers/index', ['exports', 'ember'], function (exports, Ember) {
+
+  'use strict';
+
+  exports['default'] = Ember['default'].Controller.extend({
+    actions: {
+      scrollToInfo: function scrollToInfo() {
+        // The bottom of the purple "welcome" banner
+        var scrollTo = Ember['default'].$(".welcome").outerHeight();
+        Ember['default'].$("html,body").animate({ scrollTop: scrollTo }, 1000);
+      }
+    }
+  });
+
+});
 define('reciprocity/controllers/step/repositories', ['exports', 'ember'], function (exports, Ember) {
 
   'use strict';
@@ -1197,7 +1212,7 @@ define('reciprocity/templates/index', ['exports'], function (exports) {
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("div");
         dom.setAttribute(el3,"class","description");
-        var el4 = dom.createTextNode("\n      A self-assessment to see if you reviewed as much code for your team as\n      they reviewed for you (GitHub only).\n    ");
+        var el4 = dom.createTextNode("\n      A self-assessment to see if you reviewed as much code for your team as\n      they reviewed for you (GitHub only)\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n    ");
@@ -1347,7 +1362,7 @@ define('reciprocity/templates/index', ['exports'], function (exports) {
       },
       render: function render(context, env, contextualElement) {
         var dom = env.dom;
-        var hooks = env.hooks, inline = hooks.inline, subexpr = hooks.subexpr;
+        var hooks = env.hooks, inline = hooks.inline, element = hooks.element, subexpr = hooks.subexpr;
         dom.detectNamespace(contextualElement);
         var fragment;
         if (env.useFragmentCache && dom.canClone) {
@@ -1365,13 +1380,16 @@ define('reciprocity/templates/index', ['exports'], function (exports) {
         } else {
           fragment = this.build(dom);
         }
-        var element0 = dom.childAt(fragment, [2]);
-        var morph0 = dom.createMorphAt(dom.childAt(fragment, [0, 1]),4,5);
-        var morph1 = dom.createMorphAt(dom.childAt(element0, [7]),0,1);
-        var morph2 = dom.createMorphAt(dom.childAt(element0, [9]),0,1);
-        var morph3 = dom.createMorphAt(dom.childAt(element0, [17]),0,1);
-        var morph4 = dom.createMorphAt(dom.childAt(element0, [23]),0,1);
+        var element0 = dom.childAt(fragment, [0]);
+        var element1 = dom.childAt(element0, [3]);
+        var element2 = dom.childAt(fragment, [2]);
+        var morph0 = dom.createMorphAt(dom.childAt(element0, [1]),4,5);
+        var morph1 = dom.createMorphAt(dom.childAt(element2, [7]),0,1);
+        var morph2 = dom.createMorphAt(dom.childAt(element2, [9]),0,1);
+        var morph3 = dom.createMorphAt(dom.childAt(element2, [17]),0,1);
+        var morph4 = dom.createMorphAt(dom.childAt(element2, [23]),0,1);
         inline(env, morph0, context, "link-to", ["Start", "step.username"], {"class": "start-btn"});
+        element(env, element1, context, "action", ["scrollToInfo"], {});
         inline(env, morph1, context, "link-to", ["[?]", "faq", subexpr(env, context, "query-params", [], {"anchor": "goodwill"})], {});
         inline(env, morph2, context, "link-to", ["[?]", "faq", subexpr(env, context, "query-params", [], {"anchor": "metrics"})], {});
         inline(env, morph3, context, "link-to", ["[?]", "faq", subexpr(env, context, "query-params", [], {"anchor": "reviewers"})], {});
@@ -2563,6 +2581,16 @@ define('reciprocity/tests/controllers/faq.jshint', function () {
   });
 
 });
+define('reciprocity/tests/controllers/index.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - controllers');
+  test('controllers/index.js should pass jshint', function() { 
+    ok(true, 'controllers/index.js should pass jshint.'); 
+  });
+
+});
 define('reciprocity/tests/controllers/step/repositories.jshint', function () {
 
   'use strict';
@@ -2775,7 +2803,7 @@ catch(err) {
 if (runningTests) {
   require("reciprocity/tests/test-helper");
 } else {
-  require("reciprocity/app")["default"].create({"name":"reciprocity","version":"0.3.4.abd5a861"});
+  require("reciprocity/app")["default"].create({"name":"reciprocity","version":"0.4.0.1b9c968d"});
 }
 
 /* jshint ignore:end */
