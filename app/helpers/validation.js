@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import GithubHelpers from './github';
 
 // Returns a promise that resolves if everything is ok, or errors
@@ -9,7 +10,7 @@ import GithubHelpers from './github';
 // 3. If a token is supplied, that it is consistent with the username.
 //    (reciprocity is a self-assessment tool)
 function validateUser(username, token = null) {
-  return new Promise(function(resolve, reject) {
+  return new Ember.RSVP.Promise(function(resolve, reject) {
     if (!token) {
       GithubHelpers.ajax('https://api.github.com/users/' + username)
       .then(function() {
