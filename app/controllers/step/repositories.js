@@ -7,8 +7,10 @@ export default Ember.Controller.extend({
 
   init: function() {
     this._super();
-    this.set('selectedRepositories',
-        JSON.parse(localStorage.getItem('selectedRepositories') || []));
+    var repositories = localStorage.getItem('selectedRepositories');
+    if (repositories) {
+      this.set('selectedRepositories', JSON.parse(repositories));
+    }
   },
 
   allRepositories: function() {
