@@ -22,13 +22,14 @@
     analyze, looking for comments that contain the phrase "LGTM" ("looks good
     to me"). If you approved someone else's code, you'll get "goodwill" points.
     If someone else approved your code, you'll lose goodwill points.
-    <a href='#' {{action 'goToAnchor' 'faq' 'reviewers'}}>[?]</a>
+    {{link-to '[?]' 'faq' (query-params anchor='goodwill')}}
+    {{!-- TODO(azirbel): Use target='_blank' less --}}
   </p>
   <p>
-    Plus, cool stats! See your goodwill change over time, get a list of all the pull
-    requests you've been involved in, and "score" pull requests using a variety
+    Plus, cool stats! See your goodwill change over time, get a list of all the
+    pull requests that involve you, and "score" pull requests using a variety
     of metrics.
-    <a href='#' {{action 'goToAnchor' 'faq' 'metrics'}}>[?]</a>
+    {{link-to '[?]' 'faq' (query-params anchor='metrics')}}
   </p>
 
   <h1>How does it work?</h1>
@@ -43,7 +44,7 @@
     Reciprocity will scan through every pull request in each repository you
     selected. It looks for comments that contain the phrase "LGTM", and
     determines the pull request author and reviewer(s).
-    <a href='#' {{action 'goToAnchor' 'faq' 'reviewers'}}>[?]</a>
+    {{link-to '[?]' 'faq' (query-params anchor='reviewers')}}
   </p>
   <p>
     All of this information is then combined into analytics, so you can get a
@@ -52,7 +53,7 @@
   
   <h1>More information</h1>
   <p>
-    Check out the {{link-to 'frequently asked questions' 'faq'}} page.
+    Check out the {{link-to 'frequently asked questions' 'faq' (query-params anchor='top')}} page.
   </p>
 
   <h1>About the author</h1>
