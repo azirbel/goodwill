@@ -15,7 +15,7 @@ module.exports = function (grunt) {
         'tagAnnotation': 'Release %s',
         'increment': 'patch',
         'buildCommand': 'ember build --environment="gh-pages"',
-        'distRepo': '-b gh-pages git@github.com:azirbel/reciprocity',
+        'distRepo': '-b gh-pages git@github.com:azirbel/goodwill',
         'distStageDir': '.stage',
         'distBase': 'dist',
         'distFiles': ['**/*'],

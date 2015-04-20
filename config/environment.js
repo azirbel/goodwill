@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'reciprocity',
+    modulePrefix: 'goodwill',
     environment: environment,
     baseURL: '/',
     // Sadly, need hashes to host on github pages
@@ -43,7 +43,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'gh-pages') {
-    ENV.baseURL = '/reciprocity/';
+    ENV.baseURL = '/goodwill/';
   }
 
   return ENV;

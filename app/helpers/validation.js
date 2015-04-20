@@ -8,7 +8,7 @@ import GithubHelpers from './github';
 // 1. The username is valid on GitHub
 // 2. If a token is supplied, the username + token is a valid login
 // 3. If a token is supplied, that it is consistent with the username.
-//    (reciprocity is a self-assessment tool)
+//    (Goodwill is a self-assessment tool)
 function validateUser(username, token = null) {
   return new Ember.RSVP.Promise(function(resolve, reject) {
     if (!token) {

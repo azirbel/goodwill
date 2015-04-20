@@ -11,7 +11,7 @@
   <p>
     This is a security hole; it's an easy way to leak all your permissions,
     fast. To mitigate this, you can limit the permissions that each token has.
-    Reciprocity only needs read-only access (the default).
+    Goodwill only needs read-only access (the default).
   </p>
   <p>
     There is an alternative: the
@@ -42,7 +42,7 @@
 
   <h2 id='starred'>Why use starred repositories?</h2>
   <p>
-    Reciprocity lets you select repositories to analyze from a list of your
+    Goodwill lets you select repositories to analyze from a list of your
     starred repositories.
   </p>
   <p>
@@ -61,7 +61,7 @@
   <p>
     My team uses a code word - LGTM (looks good to me) - to formally approve a
     pull request. We don't merge unless someone has given their LGTM. This
-    makes it very easy for Reciprocity to search through comments looking for
+    makes it very easy for Goodwill to search through comments looking for
     the phrase "LGTM".
   </p>
   <p>
@@ -69,14 +69,14 @@
     cancel out.
   </p>
   <p>
-    One special case that Reciprocity does handle: if the author of a pull
+    One special case that Goodwill does handle: if the author of a pull
     request comments on their own request, with "LGTM" and another author's
     name, then that other author will be counted as the reviewer for that pull
     request. This addresses a common pattern: the author commenting "verbal
     LGTM by @otherperson".
   </p>
   <p>
-    If you use a phrase other than LGTM... I'm afraid Reciprocity don't support
+    If you use a phrase other than LGTM... I'm afraid Goodwill don't support
     that right now. You can open an issue in my GitHub repo, or just fork this
     repository and add your own logic.
   </p>
@@ -94,12 +94,12 @@
 
   <h2 id='metrics'>How much weight do you give pull requests?</h2>
   <p>
-    To be useful, Reciprocity needs a way to estimate how much work it took you
+    To be useful, Goodwill needs a way to estimate how much work it took you
     (or someone else) to review a pull request.
   </p>
   <p>
     The most common metric is "lines of code". That's an option with
-    Reciprocity, but it's a bad one. If you've reviewed even one huge refactor,
+    Goodwill, but it's a bad one. If you've reviewed even one huge refactor,
     suddenly your analysis is skewed by ten thousand lines of code.
   </p>
   <p>
