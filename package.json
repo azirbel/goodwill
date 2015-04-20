@@ -1,6 +1,6 @@
 {
   "name": "goodwill",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Review your GitHub code reviews",
   "private": true,
   "directories": {
