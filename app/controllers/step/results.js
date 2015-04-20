@@ -18,9 +18,22 @@ export default Ember.Controller.extend({
     { name: 'Lines of Code', id: 'loc' }
   ]),
 
+  // TODO(azirbel): Also a hack, would be better to keep all the information in
+  // the "metrics" object, but I'm patching this and don't want to refactor
+  // now.
+  metricDescriptions: {
+    'score': 'a weighted estimate of how much work each code review took',
+    'num': 'split into small/large categories for less/greater than 200 lines ' +
+      'of code',
+    'loc': 'the sum of lines added and deleted in a pull request'
+  },
+  metricDescription: function() {
+    return this.metricDescriptions[this.get('metric')];
+  }.property('metric'),
+
   metric: 'score',
 
-  // TODO(azirbel): Hack for now
+  // TODO(azirbel): Hack, should use a handlebars helper instead
   metricIsScore: Ember.computed.equal('metric', 'score'),
   metricIsNum: Ember.computed.equal('metric', 'num'),
   metricIsLoc: Ember.computed.equal('metric', 'loc'),

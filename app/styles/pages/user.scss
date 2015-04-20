@@ -3,3 +3,25 @@ input {
   width: 100%;
   padding-left: 6px;
 }
+
+// This should be refactored; the three-column grid should have been a core
+// component of the CSS
+.three-panel-block {
+  overflow: hidden; // Wrap around floating content
+
+  .panel {
+    float: left;
+    width: 33.33%;
+  }
+
+  h3 {
+    font-weight: normal;
+    margin: 0;
+  }
+
+  p {
+    padding-right: 15px;
+    margin-bottom: 0;
+  }
+}
+

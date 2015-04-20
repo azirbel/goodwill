@@ -1,7 +1,7 @@
 <h1 class='title'>Results & Analysis</h1>
 
 <div class='wrapper'>
-  <p>Analyzing 
+  <p class='high-text'>Analyzing 
   {{select-2
     content=metrics
     value=metric
@@ -9,14 +9,19 @@
     optionValuePath='id'
     searchEnabled=false
   }}
-  <a href='#' {{action 'goToAnchor' 'faq' 'metrics'}}>[?]</a>
+  , {{metricDescription}}.
+  {{link-to '[?]' 'faq' (query-params anchor='metrics')}}
+  </p>
+  <p>
+    You gain goodwill points when you review code for your team, and lose points
+    when they review your code.
   </p>
 </div>
 
 <div class='wrapper'>
   <div class='center'>
     <h2 class='goodwill'>Goodwill
-    <a href='#' {{action 'goToAnchor' 'faq' 'goodwill'}}>[?]</a>
+    {{link-to '[?]' 'faq' (query-params anchor='goodwill')}}
     </h2>
     <div {{bind-attr
     class=':goodwill totalGoodwillIsPositive:positive:negative'}}>
@@ -32,6 +37,7 @@
   }}
 </div>
 
+<h2>Your pull request history</h2>
 {{#each stat in stats}}
   <a target='_blank' {{bind-attr href='stat.htmlUrl'}} class='pr-stat'>
     <div class='left-1'>

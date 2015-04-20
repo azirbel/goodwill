@@ -3,7 +3,7 @@
 <p class='last'>
   Here's a list of your starred repositories. Please select which ones you'd
   like to analyze.
-  <a href='#' {{action 'goToAnchor' 'faq' 'starred'}}>[?]</a>
+  {{link-to '[?]' 'faq' (query-params anchor='starred')}}
 </p>
 
 {{#each repoWrapper in displayRepoWrappers}}

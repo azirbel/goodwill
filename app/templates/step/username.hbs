@@ -1,29 +1,66 @@
 <h1 class='title'>Username and Authentication</h1>
 <h2>What is your GitHub username?</h2>
 <div class='username-input'>
-  {{input value=username}}
+  {{input value=username placeholder='GitHub username'}}
 </div>
 
 <h2>Want to analyze private repositories?</h2>
 <p>
-  You can skip this step if you only care about open-source repositories, but
-  authenticating to GitHub will allow you to see private repositories. If you
-  have a lot of data, this will also be necessary to avoid rate-limiting.
+  To analyze private repositories, or avoid rate-limiting, you'll need to
+  authenticate to GitHub. It's optional but recommended.
 </p>
 <p>
-  To authenticate,
-  <a href='https://github.com/settings/tokens/new'>generate a new Personal
-  Access Token on GitHub</a>. These tokens exist for quick and easy use;
-  you might use them if you were running a script you'd written locally.
-  Goodwill runs a lot like a script. You only need to select "repo" and
-  "user" permissions (or stick with the defaults).
-  {{link-to '[?]' 'faq' (query-params anchor='tokens')}}
+  Concerned about security? Good! But here's why giving access is ok:
 </p>
+<div class='three-panel-block'>
+  <div class='panel'>
+    <h3>It's Open Source</h3>
+    <p>
+      You can read the source code
+      <a href='https://github.com/azirbel/goodwill'>on GitHub</a>
+      and see that nothing sketchy is going on.
+    </p>
+  </div>
+  <div class='panel'>
+    <h3>It's Read-Only</h3>
+    <p>
+      Restricted persmissions mean Goodwill can't edit any of your data.
+    </p>
+  </div>
+  <div class='panel'>
+    <h3>It's Temporary</h3>
+    <p>
+      Your token isn't saved to a database, and you can delete it when you're
+      done.
+    </p>
+  </div>
+</div>
 <p>
-  Once you've generated your token, paste it below:
+  Here's how to authenticate:
+  <ol>
+    <li>
+      <a target='_blank' href='https://github.com/settings/tokens/new'>
+      Tell GitHub you want a new personal access token</a>.
+      {{link-to '[?]' 'faq' (query-params anchor='tokens')}}
+    </li>
+    <li>
+      Confirm your GitHub password.
+    </li>
+    <li>
+      Write a description so you remember what the token is for.
+      <br>Something like "Goodwill - Temporary" will do fine.
+    </li>
+    <li>
+      Select scopes - the defaults are fine.
+      <br>All we need is "repo" (read-only access to repositories).
+    </li>
+    <li>
+      Hit "Generate Token", copy the resulting token, and paste it back here.
+    </li>
+  </ol>
 </p>
 <div class='token-input'>
-  {{input value=token}}
+  {{input value=token placeholder='GitHub token, e.g. "d94116..."'}}
 </div>
 
 <div class='button-block'>
