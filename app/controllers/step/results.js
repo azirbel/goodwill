@@ -72,13 +72,13 @@ export default Ember.Controller.extend({
   // TODO(azirbel): Better name. "Stats" doesn't make sense.
   allStats: function() {
     var _this = this;
-    var username = this.get('username');
+    var username = this.get('username').toLowerCase();
     return this.get('model').map(function(prAndComments) {
       var pr = prAndComments[0];
       var comments = prAndComments[1];
 
       var date = new Date(pr.created_at);
-      var author = pr.user.login;
+      var author = pr.user.login.toLowerCase();
       var reviewers = _this.getReviewersFromComments(author, comments);
       var valid = (reviewers.length > 0) &&
         ((author === username) || (reviewers.contains(username)));
@@ -125,7 +125,7 @@ export default Ember.Controller.extend({
   parseReviewersFromComment: function(prAuthor, comment) {
     // If the author of the PR comments said LGTM, we assume they are tagging
     // someone else that LGTM'd the PR (i.e. they are noting a verbal LGTM).
-    if (comment.user.login === prAuthor) {
+    if (comment.user.login.toLowerCase() === prAuthor.toLowerCase()) {
       // Parse the comment for other usernames - we'll assume these are the
       // people who LGTM'd the pull request
       return (comment.body.match(/@[a-zA-Z-]+/g) || []).map(function(name) {

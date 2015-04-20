@@ -23,7 +23,7 @@ function validateUser(username, token = null) {
       .then(function(response) {
         var cheat = localStorage.getItem('cheat') || false;
         // TODO(azirbel): Trim input fields in all such places
-        if (response.login !== username && !cheat) {
+        if (response.login.toLowerCase() !== username.toLowerCase() && !cheat) {
           reject('Username does not match token.');
         } else {
           resolve();
