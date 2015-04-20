@@ -204,13 +204,13 @@ define('goodwill/controllers/step/results', ['exports', 'ember'], function (expo
     // TODO(azirbel): Better name. "Stats" doesn't make sense.
     allStats: (function () {
       var _this = this;
-      var username = this.get("username");
+      var username = this.get("username").toLowerCase();
       return this.get("model").map(function (prAndComments) {
         var pr = prAndComments[0];
         var comments = prAndComments[1];
 
         var date = new Date(pr.created_at);
-        var author = pr.user.login;
+        var author = pr.user.login.toLowerCase();
         var reviewers = _this.getReviewersFromComments(author, comments);
         var valid = reviewers.length > 0 && (author === username || reviewers.contains(username));
 
@@ -255,7 +255,7 @@ define('goodwill/controllers/step/results', ['exports', 'ember'], function (expo
     parseReviewersFromComment: function parseReviewersFromComment(prAuthor, comment) {
       // If the author of the PR comments said LGTM, we assume they are tagging
       // someone else that LGTM'd the PR (i.e. they are noting a verbal LGTM).
-      if (comment.user.login === prAuthor) {
+      if (comment.user.login.toLowerCase() === prAuthor.toLowerCase()) {
         // Parse the comment for other usernames - we'll assume these are the
         // people who LGTM'd the pull request
         return (comment.body.match(/@[a-zA-Z-]+/g) || []).map(function (name) {
@@ -507,7 +507,7 @@ define('goodwill/helpers/validation', ['exports', 'ember', 'goodwill/helpers/git
         GithubHelpers['default'].ajax("https://api.github.com/user", token).then(function (response) {
           var cheat = localStorage.getItem("cheat") || false;
           // TODO(azirbel): Trim input fields in all such places
-          if (response.login !== username && !cheat) {
+          if (response.login.toLowerCase() !== username.toLowerCase() && !cheat) {
             reject("Username does not match token.");
           } else {
             resolve();
@@ -2932,7 +2932,7 @@ catch(err) {
 if (runningTests) {
   require("goodwill/tests/test-helper");
 } else {
-  require("goodwill/app")["default"].create({"name":"goodwill","version":"0.5.0.7421df4f"});
+  require("goodwill/app")["default"].create({"name":"goodwill","version":"0.5.1.b6927313"});
 }
 
 /* jshint ignore:end */
