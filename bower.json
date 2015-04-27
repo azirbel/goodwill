@@ -1,6 +1,6 @@
 {
   "name": "goodwill",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "dependencies": {
     "jquery": "1.11.1",
     "ember": "1.10.0",
