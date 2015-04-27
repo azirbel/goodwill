@@ -35,6 +35,13 @@ Goodwill is an Ember app. You'll need git, node, bower, and ember-cli.
 
 * `grunt release-it:X.Y.Z`
 
+## Major TODOs Remaining
+
+* Show a warning if rate-limiting is happening
+* Ensure we are counting both "issue" and "review" comments
+* Allow getting more than 100 objects from GitHub API using `per_page`
+* Tests to ensure scoring works as expected
+
 ## License
 
 MIT. See the [license file](LICENSE).
