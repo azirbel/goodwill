@@ -110,6 +110,26 @@ header {
   margin-right: auto;
   margin-top: 120px; }
 
+@media (max-width: 600px) {
+  body main {
+    width: 95%; }
+  body .project-header {
+    font-size: 48px; }
+  body .description {
+    width: 95%; }
+  body .azirbel-graph {
+    width: 95%; } }
+
+@media (max-width: 300px) {
+  body main {
+    width: 295px; }
+  body .description {
+    width: 295px; }
+  body .welcome {
+    width: 295px; }
+  body .azirbel-graph {
+    width: 295px; } }
+
 .button-block {
   overflow: hidden;
   margin: 30px 0;
@@ -345,3 +365,6 @@ html, body {
     cursor: pointer; }
     .error-bar:hover .fa-times {
       color: #D080EC; }
+
+.azirbel-graph {
+  width: 600px; }

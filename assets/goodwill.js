@@ -94,14 +94,6 @@ define('goodwill/controllers/step/repositories', ['exports', 'ember'], function 
       return [];
     }).property(),
 
-    init: function init() {
-      this._super();
-      var repositories = localStorage.getItem("selectedRepositories");
-      if (repositories) {
-        this.set("selectedRepositories", JSON.parse(repositories));
-      }
-    },
-
     allRepositories: (function () {
       return (this.get("model") || []).mapBy("full_name").sort();
     }).property("model.[]"),
@@ -141,13 +133,6 @@ define('goodwill/controllers/step/results', ['exports', 'ember'], function (expo
     queryParams: ["metric"],
 
     username: "",
-
-    // TODO(azirbel): Username isn't updated here, if init was already called on
-    // this singleton controller
-    init: function init() {
-      this._super();
-      this.set("username", localStorage.getItem("githubUsername") || "");
-    },
 
     metrics: Ember['default'].A([{ name: "Complexity Score", id: "score" }, { name: "Number of PRs", id: "num" }, { name: "Lines of Code", id: "loc" }]),
 
@@ -635,9 +620,12 @@ define('goodwill/routes/step/repositories', ['exports', 'ember', 'goodwill/helpe
     // Make sure our persisted selected repositories are only valid ones
     setupController: function setupController(controller, model) {
       this._super(controller, model);
-      controller.set("selectedRepositories", controller.get("selectedRepositories").filter(function (repository) {
-        return model.mapBy("full_name").contains(repository);
-      }));
+      var repositories = localStorage.getItem("selectedRepositories");
+      if (repositories) {
+        controller.set("selectedRepositories", JSON.parse(repositories).filter(function (repository) {
+          return model.mapBy("full_name").contains(repository);
+        }));
+      }
     },
 
     hideErrors: (function () {
@@ -695,6 +683,11 @@ define('goodwill/routes/step/results', ['exports', 'ember', 'goodwill/helpers/gi
         // got; we just assume it was a login error from the first step.
         _this.transitionTo("step.username");
       });
+    },
+
+    setupController: function setupController(controller, model) {
+      this._super(controller, model);
+      controller.set("username", localStorage.getItem("githubUsername") || "");
     },
 
     hideErrors: (function () {
@@ -908,6 +901,32 @@ define('goodwill/templates/faq', ['exports'], function (exports) {
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("h2");
+        dom.setAttribute(el2,"id","history");
+        var el3 = dom.createTextNode("Why make this site?");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("p");
+        var el3 = dom.createTextNode("\n    This project started after I got very behind on reviewing pull requests.\n    Following the principle \"if you cannot measure it, you cannot improve it\",\n    I wanted to make sure to track my code reviews so I wouldn't get behind\n    again.\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("p");
+        var el3 = dom.createTextNode("\n    Here's the analysis of my code reviews at Addepar. I've improved!\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("img");
+        dom.setAttribute(el2,"class","azirbel-graph");
+        dom.setAttribute(el2,"alt","My code review graph");
+        dom.setAttribute(el2,"src","assets/images/azirbel-graph.png");
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n\n  ");
         dom.appendChild(el1, el2);
@@ -1185,7 +1204,7 @@ define('goodwill/templates/faq', ['exports'], function (exports) {
         }
         var element0 = dom.childAt(fragment, [0]);
         var morph0 = dom.createMorphAt(element0,2,3);
-        var morph1 = dom.createMorphAt(dom.childAt(element0, [60]),0,1);
+        var morph1 = dom.createMorphAt(dom.childAt(element0, [68]),0,1);
         inline(env, morph0, context, "link-to", ["← Back to home", "index"], {});
         inline(env, morph1, context, "link-to", ["Home", "index"], {"class": "home-btn"});
         return fragment;
@@ -1223,7 +1242,7 @@ define('goodwill/templates/index', ['exports'], function (exports) {
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("div");
         dom.setAttribute(el3,"class","description");
-        var el4 = dom.createTextNode("\n      A self-assessment to see if you reviewed as much code for your team as\n      they reviewed for you\n    ");
+        var el4 = dom.createTextNode("\n      A self-assessment to see if you review as much code for your team as\n      they review for you\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n    ");
@@ -1235,7 +1254,13 @@ define('goodwill/templates/index', ['exports'], function (exports) {
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("p");
         dom.setAttribute(el2,"class","more-text");
-        var el3 = dom.createTextNode("Or, read more...");
+        var el3 = dom.createTextNode("\n    Or, read more\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("br");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n  ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
@@ -1395,16 +1420,18 @@ define('goodwill/templates/index', ['exports'], function (exports) {
         var element1 = dom.childAt(element0, [3]);
         var element2 = dom.childAt(fragment, [2]);
         var morph0 = dom.createMorphAt(dom.childAt(element0, [1]),4,5);
-        var morph1 = dom.createMorphAt(dom.childAt(element2, [7]),0,1);
-        var morph2 = dom.createMorphAt(dom.childAt(element2, [9]),0,1);
-        var morph3 = dom.createMorphAt(dom.childAt(element2, [17]),0,1);
-        var morph4 = dom.createMorphAt(dom.childAt(element2, [23]),0,1);
+        var morph1 = dom.createMorphAt(element1,2,3);
+        var morph2 = dom.createMorphAt(dom.childAt(element2, [7]),0,1);
+        var morph3 = dom.createMorphAt(dom.childAt(element2, [9]),0,1);
+        var morph4 = dom.createMorphAt(dom.childAt(element2, [17]),0,1);
+        var morph5 = dom.createMorphAt(dom.childAt(element2, [23]),0,1);
         inline(env, morph0, context, "link-to", ["Get Started", "step.username"], {"class": "start-btn"});
         element(env, element1, context, "action", ["scrollToInfo"], {});
-        inline(env, morph1, context, "link-to", ["[?]", "faq", subexpr(env, context, "query-params", [], {"anchor": "goodwill"})], {});
-        inline(env, morph2, context, "link-to", ["[?]", "faq", subexpr(env, context, "query-params", [], {"anchor": "metrics"})], {});
-        inline(env, morph3, context, "link-to", ["[?]", "faq", subexpr(env, context, "query-params", [], {"anchor": "reviewers"})], {});
-        inline(env, morph4, context, "link-to", ["frequently asked questions", "faq", subexpr(env, context, "query-params", [], {"anchor": "top"})], {});
+        inline(env, morph1, context, "fa-icon", ["chevron-down"], {});
+        inline(env, morph2, context, "link-to", ["[?]", "faq", subexpr(env, context, "query-params", [], {"anchor": "goodwill"})], {});
+        inline(env, morph3, context, "link-to", ["[?]", "faq", subexpr(env, context, "query-params", [], {"anchor": "metrics"})], {});
+        inline(env, morph4, context, "link-to", ["[?]", "faq", subexpr(env, context, "query-params", [], {"anchor": "reviewers"})], {});
+        inline(env, morph5, context, "link-to", ["frequently asked questions", "faq", subexpr(env, context, "query-params", [], {"anchor": "top"})], {});
         return fragment;
       }
     };
@@ -2932,7 +2959,7 @@ catch(err) {
 if (runningTests) {
   require("goodwill/tests/test-helper");
 } else {
-  require("goodwill/app")["default"].create({"name":"goodwill","version":"0.5.1.b6927313"});
+  require("goodwill/app")["default"].create({"name":"goodwill","version":"0.5.2.993b1a39"});
 }
 
 /* jshint ignore:end */
