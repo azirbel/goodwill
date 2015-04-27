@@ -5,14 +5,6 @@ export default Ember.Controller.extend({
     return [];
   }.property(),
 
-  init: function() {
-    this._super();
-    var repositories = localStorage.getItem('selectedRepositories');
-    if (repositories) {
-      this.set('selectedRepositories', JSON.parse(repositories));
-    }
-  },
-
   allRepositories: function() {
     return (this.get('model') || []).mapBy('full_name').sort();
   }.property('model.[]'),

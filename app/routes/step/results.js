@@ -51,6 +51,11 @@ export default Ember.Route.extend({
     });
   },
 
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    controller.set('username', localStorage.getItem('githubUsername') || '');
+  },
+
   hideErrors: function() {
     this.send('hideError');
   }.on('deactivate')

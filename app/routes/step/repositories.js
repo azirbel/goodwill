@@ -22,11 +22,14 @@ export default Ember.Route.extend({
   // Make sure our persisted selected repositories are only valid ones
   setupController: function(controller, model) {
     this._super(controller, model);
-    controller.set('selectedRepositories',
-        controller.get('selectedRepositories').filter(function(repository) {
-          return model.mapBy('full_name').contains(repository);
-        })
-    );
+    var repositories = localStorage.getItem('selectedRepositories');
+    if (repositories) {
+      controller.set('selectedRepositories',
+          JSON.parse(repositories).filter(function(repository) {
+            return model.mapBy('full_name').contains(repository);
+          })
+      );
+    }
   },
 
   hideErrors: function() {

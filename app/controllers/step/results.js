@@ -5,13 +5,6 @@ export default Ember.Controller.extend({
 
   username: '',
 
-  // TODO(azirbel): Username isn't updated here, if init was already called on
-  // this singleton controller
-  init: function() {
-    this._super();
-    this.set('username', localStorage.getItem('githubUsername') || '');
-  },
-
   metrics: Ember.A([
     { name: 'Complexity Score', id: 'score' },
     { name: 'Number of PRs', id: 'num' },
