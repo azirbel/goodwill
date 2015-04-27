@@ -175,6 +175,7 @@ header {
 
 .welcome {
   height: 100vh;
+  min-height: 600px;
   background-color: #3E1B90;
   position: relative;
   overflow: hidden;

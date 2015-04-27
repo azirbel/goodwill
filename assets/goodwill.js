@@ -2959,7 +2959,7 @@ catch(err) {
 if (runningTests) {
   require("goodwill/tests/test-helper");
 } else {
-  require("goodwill/app")["default"].create({"name":"goodwill","version":"0.5.2.993b1a39"});
+  require("goodwill/app")["default"].create({"name":"goodwill","version":"0.5.3.1bb42762"});
 }
 
 /* jshint ignore:end */
