@@ -846,7 +846,13 @@ define('goodwill/templates/error', ['exports'], function (exports) {
         var el4 = dom.createTextNode("file an issue");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    and I'll try to fix it! In the meantime, you'll have to go back and try\n    again.\n  ");
+        var el3 = dom.createTextNode("\n    and I'll try to fix it! In the meantime, you'll have to go back.\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("p");
+        var el3 = dom.createTextNode("\n    This may have happened because Goodwill exceeded GitHub's rate limit\n    while grabbing data to analyze. Try adding authentication in step 1\n    to avoid this limit.\n  ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
@@ -2959,7 +2965,7 @@ catch(err) {
 if (runningTests) {
   require("goodwill/tests/test-helper");
 } else {
-  require("goodwill/app")["default"].create({"name":"goodwill","version":"0.5.3.1bb42762"});
+  require("goodwill/app")["default"].create({"name":"goodwill","version":"0.5.4.3c59f224"});
 }
 
 /* jshint ignore:end */
