@@ -1,5 +1,7 @@
 .welcome {
   height: 100vh; // 100% viewport height
+  min-height: 600px;
+
   background-color: $primary-color-dark;
   position: relative;
   overflow: hidden;
